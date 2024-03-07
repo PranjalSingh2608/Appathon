@@ -1,8 +1,8 @@
 import 'package:appathon/screens/home_page.dart';
 import 'package:appathon/screens/login_page.dart';
 import 'package:appathon/screens/signup_page.dart';
+import 'package:appathon/utils/colors.dart';
 import 'package:flutter/material.dart';
-
 
 import 'utils/routes.dart';
 
@@ -18,9 +18,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // fontFamily: GoogleFonts.roboto().fontFamily,
+        fontFamily: 'Europa',
         brightness: Brightness.light,
-        backgroundColor: backgroundColor,
+        backgroundColor: MyColors.background,
+
         // textTheme: GoogleFonts.robotoTextTheme(
         //   Theme.of(context).textTheme.apply(
         //         bodyColor: Colors.black.withOpacity(0.8),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../utils/http.dart';
+import '../utils/colors.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -21,8 +22,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: Text('Register'),
-        backgroundColor: Color(0xff3EB489),
+        title: Text(
+          'Register',
+          style: TextStyle(
+            fontFamily: 'Europa',
+            fontSize: 32,
+          ),
+        ),
+        backgroundColor: MyColors.col3,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -45,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         labelText: 'Username',
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0xff3EB489),
+                            color: MyColors.col2,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(30.0),
@@ -59,7 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         labelText: 'OTP',
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0xff3EB489),
+                            color: MyColors.col2,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(30.0),
@@ -73,7 +80,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         labelText: 'Phone Number',
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0xff3EB489),
+                            color: MyColors.col2,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(30.0),
@@ -87,7 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         labelText: 'Address',
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0xff3EB489),
+                            color: MyColors.col2,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(30.0),
@@ -112,11 +119,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     final phoneNo = phoneController.text;
                     final address = addressController.text;
                     try {
-                      await authService.registerUser(username,otp,phoneNo,address);
+                      await authService.registerUser(
+                          username, otp, phoneNo, address);
                       Navigator.of(context).pushReplacementNamed('/login');
                     } catch (e) {
                       print('Registration error: $e');
-              
                     }
                   },
             child: Container(
@@ -126,10 +133,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: isLoading
                     ? Center(
                         child: CircularProgressIndicator(
-                          color:Color(0xff3EB489),
+                          color: MyColors.col2,
                         ),
                       )
-                    :   Text(
+                    : Text(
                         'Register',
                         style: TextStyle(
                           fontSize: 18,
@@ -139,7 +146,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
             style: ElevatedButton.styleFrom(
-              primary: Color(0xff3EB489).withOpacity(0.8),
+              primary: MyColors.col2,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               ),
@@ -154,7 +161,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Text(
               'Already a user? Log in here',
               style: TextStyle(
-                color: Color(0xff3EB489),
+                color: MyColors.col2,
               ),
             ),
           ),
