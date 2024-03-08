@@ -28,29 +28,49 @@ class _QnAPageState extends State<QnAPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Post Answer'),
+          backgroundColor: MyColors.background,
+          title: Text(
+            'Post Answer',
+            style: TextStyle(fontFamily: 'Couture'),
+          ),
           content: TextFormField(
             onChanged: (value) {
               answer = value;
             },
             decoration: InputDecoration(
-              hintText: 'Your Answer Here',
+              hintText: 'Write your answer here.',
             ),
           ),
           actions: <Widget>[
-            ElevatedButton(
+            TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancel'),
+              child: Text(
+                'Cancel',
+                style: TextStyle(fontFamily: 'opensans', color: MyColors.col2),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                await postAnswer(questionId, answer);
-                Navigator.of(context).pop();
-                fetchQnAData(); // Refresh after posting an answer
-              },
-              child: Text('Post Answer'),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: MyColors.col3,
+                ),
+                onPressed: () async {
+                  await postAnswer(questionId, answer);
+                  Navigator.of(context).pop();
+                  fetchQnAData(); // Refresh after posting an answer
+                },
+                child: const Text(
+                  'Post Answer',
+                  style: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
             ),
           ],
         );
@@ -134,27 +154,47 @@ class _QnAPageState extends State<QnAPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Post Question'),
+          backgroundColor: MyColors.background,
+          title: Text(
+            'Post Question',
+            style: TextStyle(fontFamily: 'Couture'),
+          ),
           content: TextFormField(
             controller: newQuestionController,
             decoration: InputDecoration(
-              hintText: 'Your Question Here',
+              hintText: 'Write your question here.',
             ),
           ),
           actions: <Widget>[
-            ElevatedButton(
+            TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancel'),
+              child: Text(
+                'Cancel',
+                style: TextStyle(fontFamily: 'opensans', color: MyColors.col2),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                await postQuestion(newQuestionController.text.toString());
-                Navigator.of(context).pop();
-                fetchQnAData();
-              },
-              child: Text('Post Question'),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: MyColors.col3,
+                ),
+                onPressed: () async {
+                  await postQuestion(newQuestionController.text.toString());
+                  Navigator.of(context).pop();
+                  fetchQnAData();
+                },
+                child: const Text(
+                  'Post Question',
+                  style: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
             ),
           ],
         );
@@ -195,7 +235,10 @@ class _QnAPageState extends State<QnAPage> {
           showQuestionDialog();
         },
         backgroundColor: MyColors.col3,
-        child: Image.asset('assets/images/chatbot0.png'),
+        child: Container(
+            height: 40,
+            width: 40,
+            child: Image.asset('assets/images/qna1.png')),
       ),
       body: ListView.builder(
         itemCount: qnaList.length,
@@ -205,33 +248,160 @@ class _QnAPageState extends State<QnAPage> {
           final qasker = qna['qasker'];
           final answer = qna['answer'];
 
-          return Card(
-            margin: EdgeInsets.all(8),
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Question: $question'),
-                  SizedBox(height: 8),
-                  Text('Asked by: $qasker'),
-                  SizedBox(height: 8),
-                  if (answer != "")
-                    Text('Answer: $answer')
-                  else
-                    Column(
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            showAnswerDialog(qna['_id']);
-                          },
-                          child: Text('Post Answer'),
-                        ),
-                        SizedBox(height: 8),
-                        // Space to enter the answer
-                      ],
+          return InkWell(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    backgroundColor: MyColors.background,
+                    title: Text(
+                      'Details',
+                      style: const TextStyle(
+                          color: Color(0xff181414), fontFamily: 'couture'),
                     ),
-                ],
+                    content: SingleChildScrollView(
+                      child: Container(
+                        // height: MediaQuery.of(context).size.height * 0.2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              question,
+                              style: const TextStyle(
+                                  color: Color(0xff181414),
+                                  fontFamily: 'opensans'),
+                            ),
+                            if (answer != "")
+                              Text(
+                                'Answer: $answer',
+                                style: TextStyle(
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )
+                            else
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.4,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: MyColors.col3,
+                                      ),
+                                      onPressed: () {
+                                        showAnswerDialog(qna['_id']);
+                                      },
+                                      child: const Text(
+                                        'Post Answer',
+                                        style: TextStyle(
+                                          fontFamily: 'OpenSans',
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(); // Close the dialog
+                        },
+                        child: Text(
+                          'Go Back',
+                          style: TextStyle(color: MyColors.col2),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: Card(
+              margin: EdgeInsets.all(8),
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width * 0.1,
+                      child: Image.asset('assets/images/user0.png'),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.02,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.75,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRect(
+                            child: Text(
+                              'Question: $question',
+                              style: TextStyle(
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.bold),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          // SizedBox(height: 8),
+                          ClipRRect(
+                            child: Text(
+                              'Asked by: $qasker',
+                              style: TextStyle(
+                                fontFamily: 'OpenSans',
+                                color: Colors.grey,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Divider(),
+                          if (answer != "")
+                            Text(
+                              'Answer: $answer',
+                              style: TextStyle(fontFamily: 'OpenSans'),
+                            )
+                          else
+                            Column(
+                              children: [
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.4,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: MyColors.col3,
+                                    ),
+                                    onPressed: () {
+                                      showAnswerDialog(qna['_id']);
+                                    },
+                                    child: const Text(
+                                      'Post Answer',
+                                      style: TextStyle(
+                                        fontFamily: 'OpenSans',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

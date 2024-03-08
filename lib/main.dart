@@ -1,6 +1,7 @@
 import 'package:appathon/screens/animal_schema_page.dart';
 import 'package:appathon/screens/cattle_register_page.dart';
 import 'package:appathon/screens/home_page.dart';
+import 'package:appathon/screens/learn_page.dart';
 import 'package:appathon/screens/login_page.dart';
 import 'package:appathon/screens/marketplacescreen.dart';
 import 'package:appathon/screens/milk_record_page.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         MyRoutes.StockRoute: (context) => StockScreen(),
         MyRoutes.QnARoute: (context) => QnAPage(),
         MyRoutes.MarketplaceRoute: (context) => MarketplaceScreen(),
+        MyRoutes.LearnPageRoute: (context) => LearnPage(),
       },
     );
   }
