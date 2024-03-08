@@ -66,7 +66,7 @@ class _AnimalSchemaScreenState extends State<AnimalSchemaScreen> {
       ),
       body: ListView.builder(
         itemCount: animalsData.length,
-        itemBuilder: (context, index) {
+        itemBuilder: (context, index){
           final animal = animalsData[index];
           return Padding(
             padding: const EdgeInsets.only(

@@ -13,6 +13,7 @@ class QnAPage extends StatefulWidget {
 }
 
 class _QnAPageState extends State<QnAPage> {
+  TextEditingController newQuestionController = TextEditingController();
   List<dynamic> qnaList = [];
   @override
   void initState() {
@@ -44,9 +45,10 @@ class _QnAPageState extends State<QnAPage> {
               child: Text('Cancel'),
             ),
             ElevatedButton(
-              onPressed: () {
-                postAnswer(questionId, answer);
+              onPressed: () async {
+                await postAnswer(questionId, answer);
                 Navigator.of(context).pop();
+                fetchQnAData(); // Refresh after posting an answer
               },
               child: Text('Post Answer'),
             ),
@@ -104,6 +106,62 @@ class _QnAPageState extends State<QnAPage> {
     }
   }
 
+  Future<void> postQuestion(String question) async {
+    final apiUrl = 'https://smiling-garment-deer.cyclic.app/questionpost';
+    final prefs = await SharedPreferences.getInstance();
+    String number = prefs.getString('phoneNo').toString();
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'question': question, 'qasker': '$number'}),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final dynamic responseData = json.decode(response.body);
+        print('Question posted successfully: $responseData');
+      } else {
+        throw Exception(
+            'Failed to post question. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> showQuestionDialog() async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Post Question'),
+          content: TextFormField(
+            controller: newQuestionController,
+            decoration: InputDecoration(
+              hintText: 'Your Question Here',
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await postQuestion(newQuestionController.text.toString());
+                Navigator.of(context).pop();
+                fetchQnAData();
+              },
+              child: Text('Post Question'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,6 +190,13 @@ class _QnAPageState extends State<QnAPage> {
         ),
         backgroundColor: MyColors.background,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showQuestionDialog();
+        },
+        backgroundColor: MyColors.col3,
+        child: Image.asset('assets/images/chatbot0.png'),
+      ),
       body: ListView.builder(
         itemCount: qnaList.length,
         itemBuilder: (context, index) {
@@ -151,14 +216,20 @@ class _QnAPageState extends State<QnAPage> {
                   SizedBox(height: 8),
                   Text('Asked by: $qasker'),
                   SizedBox(height: 8),
-                  if (answer != null)
+                  if (answer != "")
                     Text('Answer: $answer')
                   else
-                    ElevatedButton(
-                      onPressed: () {
-                        showAnswerDialog(qna['id']);
-                      },
-                      child: Text('Post Answer'),
+                    Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            showAnswerDialog(qna['_id']);
+                          },
+                          child: Text('Post Answer'),
+                        ),
+                        SizedBox(height: 8),
+                        // Space to enter the answer
+                      ],
                     ),
                 ],
               ),
