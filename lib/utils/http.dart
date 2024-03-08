@@ -104,6 +104,7 @@ Future<List<AnimalSchema>> getAnimalsForUserId(String userId) async {
       Uri.parse(apiUrl),
       headers: {'Content-Type': 'application/json'},
     );
+    print(response.body); // Print the response body
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final dynamic jsonData = json.decode(response.body);

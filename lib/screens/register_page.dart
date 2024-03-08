@@ -136,6 +136,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               final prefs = await SharedPreferences.getInstance();
               prefs.setString('phoneNo', phoneNo);
               prefs.setString('username', usernameController.text.toString());
+              
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => OTPScreen(

@@ -23,7 +23,6 @@ class _AnimalSchemaScreenState extends State<AnimalSchemaScreen> {
     try {
       final prefs = await SharedPreferences.getInstance();
       final userId = prefs.getString('phoneNo').toString();
-      ;
       final animals = await getAnimalsForUserId(userId);
       print('Received animals: $animals');
     } catch (error) {

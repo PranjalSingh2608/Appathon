@@ -17,9 +17,9 @@ class _CattleRegisterState extends State<CattleRegister> {
   final TextEditingController animalIdController = TextEditingController();
   final TextEditingController numberOfChildsController =
       TextEditingController();
-  final TextEditingController breedController = TextEditingController();
+  // final TextEditingController breedController = TextEditingController();
   final TextEditingController animalGenderController = TextEditingController();
-  final TextEditingController DOBController = TextEditingController();
+  // final TextEditingController DOBController = TextEditingController();
   final TextEditingController animalGirthController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
   final TextEditingController pregnancyStatusController =
@@ -31,9 +31,13 @@ class _CattleRegisterState extends State<CattleRegister> {
       TextEditingController();
   final TextEditingController currentMilkingStageController =
       TextEditingController();
+  DateTime selectedDOB = DateTime.now();
+
   String? animalType;
   String? currentMilkingStage;
   String? gender;
+  String? selectedBreed;
+  List<String> breeds = ['Murrah', 'Jaffrabadi', 'Gir', 'Red Sindhi', 'Dholai'];
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -80,20 +84,20 @@ class _CattleRegisterState extends State<CattleRegister> {
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(children: [
-                        TextField(
-                          controller: animalNameController,
-                          decoration: InputDecoration(
-                            labelText: 'Animal Name',
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: MyColors.col2,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16),
+                        // TextField(
+                        //   controller: animalNameController,
+                        //   decoration: InputDecoration(
+                        //     labelText: 'Animal Name',
+                        //     border: OutlineInputBorder(
+                        //       borderSide: BorderSide(
+                        //         color: MyColors.col2,
+                        //         width: 2,
+                        //       ),
+                        //       borderRadius: BorderRadius.circular(30.0),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(height: 16),
                         TextField(
                           controller: animalIdController,
                           decoration: InputDecoration(
@@ -108,20 +112,20 @@ class _CattleRegisterState extends State<CattleRegister> {
                           ),
                         ),
                         SizedBox(height: 16),
-                        TextField(
-                          controller: numberOfChildsController,
-                          decoration: InputDecoration(
-                            labelText: 'Number of Childs',
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: MyColors.col2,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16),
+                        // TextField(
+                        //   controller: numberOfChildsController,
+                        //   decoration: InputDecoration(
+                        //     labelText: 'Number of Childs',
+                        //     border: OutlineInputBorder(
+                        //       borderSide: BorderSide(
+                        //         color: MyColors.col2,
+                        //         width: 2,
+                        //       ),
+                        //       borderRadius: BorderRadius.circular(30.0),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(height: 16),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -169,18 +173,29 @@ class _CattleRegisterState extends State<CattleRegister> {
                         //   ),
                         // ),
                         SizedBox(height: 16),
-                        TextField(
-                          controller: breedController,
-                          decoration: InputDecoration(
-                            labelText: 'Breed',
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: MyColors.col2,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Breed',
+                              style: TextStyle(fontSize: 16),
                             ),
-                          ),
+                            DropdownButton<String>(
+                              value: selectedBreed,
+                              hint: Text('Select Breed'),
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedBreed = value;
+                                });
+                              },
+                              items: breeds.map((breed) {
+                                return DropdownMenuItem<String>(
+                                  value: breed,
+                                  child: Text(breed),
+                                );
+                              }).toList(),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 16),
                         // TextField(
@@ -231,7 +246,26 @@ class _CattleRegisterState extends State<CattleRegister> {
                         ),
                         SizedBox(height: 16),
                         TextField(
-                          controller: DOBController,
+                          readOnly: true, // Make the text field read-only
+                          controller: TextEditingController(
+                            text:
+                                '${selectedDOB.toLocal().toString().split(' ')[0]}',
+                          ),
+                          onTap: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: selectedDOB,
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now(),
+                            );
+
+                            if (pickedDate != null &&
+                                pickedDate != selectedDOB) {
+                              setState(() {
+                                selectedDOB = pickedDate;
+                              });
+                            }
+                          },
                           decoration: InputDecoration(
                             labelText: 'Animal DOB',
                             border: OutlineInputBorder(
@@ -241,23 +275,43 @@ class _CattleRegisterState extends State<CattleRegister> {
                               ),
                               borderRadius: BorderRadius.circular(30.0),
                             ),
-                          ),
-                        ),
-                        SizedBox(height: 16),
-                        TextField(
-                          controller: animalGirthController,
-                          decoration: InputDecoration(
-                            labelText: 'Girth of Animal',
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: MyColors.col2,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0),
+                            suffixIcon: IconButton(
+                              onPressed: () async {
+                                DateTime? pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: selectedDOB,
+                                  firstDate: DateTime(1900),
+                                  lastDate: DateTime.now(),
+                                );
+
+                                if (pickedDate != null &&
+                                    pickedDate != selectedDOB) {
+                                  setState(() {
+                                    selectedDOB = pickedDate;
+                                  });
+                                }
+                              },
+                              icon: Icon(Icons.calendar_today),
+                              color: MyColors.col2,
                             ),
                           ),
                         ),
+
                         SizedBox(height: 16),
+                        // TextField(
+                        //   controller: animalGirthController,
+                        //   decoration: InputDecoration(
+                        //     labelText: 'Girth of Animal',
+                        //     border: OutlineInputBorder(
+                        //       borderSide: BorderSide(
+                        //         color: MyColors.col2,
+                        //         width: 2,
+                        //       ),
+                        //       borderRadius: BorderRadius.circular(30.0),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(height: 16),
                         TextField(
                           controller: weightController,
                           decoration: InputDecoration(
@@ -272,66 +326,10 @@ class _CattleRegisterState extends State<CattleRegister> {
                           ),
                         ),
                         SizedBox(height: 16),
-                        TextField(
-                          controller: pregnancyStatusController,
-                          decoration: InputDecoration(
-                            labelText: 'Pregnancy Status',
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: MyColors.col2,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16),
-                        TextField(
-                          controller: lastCalvingController,
-                          decoration: InputDecoration(
-                            labelText: 'Last Calving',
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: MyColors.col2,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16),
-                        TextField(
-                          controller: lastDateOfAutoInseminationController,
-                          decoration: InputDecoration(
-                            labelText: 'Last Date of Auto Insemination',
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: MyColors.col2,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16),
-                        TextField(
-                          controller: lactationNumberController,
-                          decoration: InputDecoration(
-                            labelText: 'Lactation Number',
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: MyColors.col2,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16),
                         // TextField(
-                        //   controller: currentMilkingStageController,
+                        //   controller: pregnancyStatusController,
                         //   decoration: InputDecoration(
-                        //     labelText: 'Current Milking Stage',
+                        //     labelText: 'Pregnancy Status',
                         //     border: OutlineInputBorder(
                         //       borderSide: BorderSide(
                         //         color: MyColors.col2,
@@ -341,66 +339,126 @@ class _CattleRegisterState extends State<CattleRegister> {
                         //     ),
                         //   ),
                         // ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Animal Type',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            Row(
-                              children: [
-                                Radio<String>(
-                                  value: 'Milking',
-                                  groupValue: currentMilkingStage,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      currentMilkingStage = value;
-                                    });
-                                  },
-                                ),
-                                Text('Milking'),
-                                Radio<String>(
-                                  value: 'Dry',
-                                  groupValue: currentMilkingStage,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      currentMilkingStage = value;
-                                    });
-                                  },
-                                ),
-                                Text('Dry'),
-                              ],
-                            ),
-                          ],
-                        ),
+                        // SizedBox(height: 16),
+                        // TextField(
+                        //   controller: lastCalvingController,
+                        //   decoration: InputDecoration(
+                        //     labelText: 'Last Calving',
+                        //     border: OutlineInputBorder(
+                        //       borderSide: BorderSide(
+                        //         color: MyColors.col2,
+                        //         width: 2,
+                        //       ),
+                        //       borderRadius: BorderRadius.circular(30.0),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(height: 16),
+                        // TextField(
+                        //   controller: lastDateOfAutoInseminationController,
+                        //   decoration: InputDecoration(
+                        //     labelText: 'Last Date of Auto Insemination',
+                        //     border: OutlineInputBorder(
+                        //       borderSide: BorderSide(
+                        //         color: MyColors.col2,
+                        //         width: 2,
+                        //       ),
+                        //       borderRadius: BorderRadius.circular(30.0),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(height: 16),
+                        // TextField(
+                        //   controller: lactationNumberController,
+                        //   decoration: InputDecoration(
+                        //     labelText: 'Lactation Number',
+                        //     border: OutlineInputBorder(
+                        //       borderSide: BorderSide(
+                        //         color: MyColors.col2,
+                        //         width: 2,
+                        //       ),
+                        //       borderRadius: BorderRadius.circular(30.0),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(height: 16),
+                        // // TextField(
+                        // //   controller: currentMilkingStageController,
+                        // //   decoration: InputDecoration(
+                        // //     labelText: 'Current Milking Stage',
+                        // //     border: OutlineInputBorder(
+                        // //       borderSide: BorderSide(
+                        // //         color: MyColors.col2,
+                        // //         width: 2,
+                        // //       ),
+                        // //       borderRadius: BorderRadius.circular(30.0),
+                        // //     ),
+                        // //   ),
+                        // // ),
+                        // Column(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: [
+                        //     Text(
+                        //       'Animal Type',
+                        //       style: TextStyle(fontSize: 16),
+                        //     ),
+                        //     Row(
+                        //       children: [
+                        //         Radio<String>(
+                        //           value: 'Milking',
+                        //           groupValue: currentMilkingStage,
+                        //           onChanged: (value) {
+                        //             setState(() {
+                        //               currentMilkingStage = value;
+                        //             });
+                        //           },
+                        //         ),
+                        //         Text('Milking'),
+                        //         Radio<String>(
+                        //           value: 'Dry',
+                        //           groupValue: currentMilkingStage,
+                        //           onChanged: (value) {
+                        //             setState(() {
+                        //               currentMilkingStage = value;
+                        //             });
+                        //           },
+                        //         ),
+                        //         Text('Dry'),
+                        //       ],
+                        //     ),
+                        //   ],
+                        // ),
                         SizedBox(height: 16),
                         ElevatedButton(
                           onPressed: () async {
                             final prefs = await SharedPreferences.getInstance();
                             String number =
                                 prefs.getString('phoneNo').toString();
+                            print(number);
                             Cattle newCattle = Cattle(
                               userId: number,
-                              animalName: animalNameController.text,
+                              // animalName: animalNameController.text,
                               animalId: animalIdController.text,
-                              numberOfChilds:
-                                  int.parse(numberOfChildsController.text),
+                              // numberOfChilds:
+                              // int.parse(numberOfChildsController.text),
                               animalType: animalType.toString(),
-                              breed: breedController.text,
+                              breed: selectedBreed.toString(),
                               animalGender: gender.toString(),
-                              DOB: DOBController.text,
-                              animalGirth:
-                                  double.parse(animalGirthController.text),
+                              DOB: selectedDOB
+                                  .toLocal()
+                                  .toString()
+                                  .split(' ')[0],
+                              // animalGirth:
+                              //     double.parse(animalGirthController.text),
                               weight: double.parse(weightController.text),
-                              pregnancyStatus: pregnancyStatusController.text,
-                              lastCalving: lastCalvingController.text,
-                              lastDateOfAutoInsemination:
-                                  lastDateOfAutoInseminationController.text,
-                              lactationNumber:
-                                  int.parse(lactationNumberController.text),
-                              currentMilkingStage:
-                                  currentMilkingStage.toString(),
+                              // pregnancyStatus: pregnancyStatusController.text,
+                              // lastCalving: lastCalvingController.text,
+                              // lastDateOfAutoInsemination:
+                              //     lastDateOfAutoInseminationController.text,
+                              // lactationNumber:
+                              //     int.parse(lactationNumberController.text),
+                              // currentMilkingStage:
+                              //     currentMilkingStage.toString(),
                             );
                             try {
                               await registerCattle(newCattle);

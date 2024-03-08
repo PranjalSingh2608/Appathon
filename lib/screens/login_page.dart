@@ -102,6 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       final ans = await authService.loginUser(phoneNo);
                       if (ans == true) {
                         print("Login success");
+                        final String phoneNo = phoneController.text;
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setString('phoneNo', phoneNo);
                         Navigator.of(context).pushReplacementNamed('/home');
                       } else {
                         print("Login error");
