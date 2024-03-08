@@ -69,12 +69,13 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                           controller: animalIdentificationNumberController,
                           decoration: InputDecoration(
                             labelText: 'Animal Identification Number',
+                            labelStyle: TextStyle(fontSize: 20.0),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: MyColors.col2,
                                 width: 2,
                               ),
-                              borderRadius: BorderRadius.circular(30.0),
+                              borderRadius: BorderRadius.circular(20.0),
                             ),
                           ),
                         ),
@@ -84,7 +85,7 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                           children: [
                             Text(
                               'Milking Shift',
-                              style: TextStyle(fontSize: 16),
+                              style: TextStyle(fontSize: 18),
                             ),
                             Row(
                               children: [
@@ -97,7 +98,16 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                                     });
                                   },
                                 ),
-                                Text('Morning'),
+                                Text(
+                                  'Morning',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: 'opensans',
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 12,
+                                ),
                                 Radio<String>(
                                   value: 'Evening',
                                   groupValue: milkingShift,
@@ -107,7 +117,13 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                                     });
                                   },
                                 ),
-                                Text('Evening'),
+                                Text(
+                                  'Evening',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: 'opensans',
+                                  ),
+                                ),
                               ],
                             ),
                           ],
@@ -116,13 +132,14 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                         TextField(
                           controller: milkQuantityController,
                           decoration: InputDecoration(
-                            labelText: 'Milk Quantity(in Ltrs)',
+                            labelText: 'Milk Quantity (in Ltrs)',
+                            labelStyle: TextStyle(fontSize: 20.0),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: MyColors.col2,
                                 width: 2,
                               ),
-                              borderRadius: BorderRadius.circular(30.0),
+                              borderRadius: BorderRadius.circular(20.0),
                             ),
                           ),
                         ),
@@ -132,9 +149,10 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                           children: [
                             Text(
                               'Abnormal Milk',
-                              style: TextStyle(fontSize: 16),
+                              style: TextStyle(fontSize: 18),
                             ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Radio<String>(
                                   value: 'Yes',
@@ -145,7 +163,16 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                                     });
                                   },
                                 ),
-                                Text('Yes'),
+                                Text(
+                                  'Yes',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: 'opensans',
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 12,
+                                ),
                                 Radio<String>(
                                   value: 'No',
                                   groupValue: abnormalmilk,
@@ -155,7 +182,13 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                                     });
                                   },
                                 ),
-                                Text('No'),
+                                Text(
+                                  'No',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: 'opensans',
+                                  ),
+                                ),
                               ],
                             ),
                           ],
@@ -165,12 +198,13 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                           controller: remarksController,
                           decoration: InputDecoration(
                             labelText: 'Additional Remarks',
+                            labelStyle: TextStyle(fontSize: 20.0),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: MyColors.col3,
                                 width: 2,
                               ),
-                              borderRadius: BorderRadius.circular(30.0),
+                              borderRadius: BorderRadius.circular(20.0),
                             ),
                           ),
                         ),
@@ -197,10 +231,10 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: Center(
                               child: Text(
-                                'Register Milk Data',
+                                'Register Milk',
                                 style: TextStyle(
                                   fontSize: 16,
-                                  color: Colors.white,
+                                  color: MyColors.background,
                                 ),
                               ),
                             ),
