@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         final String phoneNo = phoneController.text;
                         final prefs = await SharedPreferences.getInstance();
                         prefs.setString('phoneNo', phoneNo);
-                        Navigator.of(context).pushReplacementNamed('/home');
+                        Navigator.of(context).pushNamed(MyRoutes.OTPLoginRoute);
                       } else {
                         print("Login error");
                       }

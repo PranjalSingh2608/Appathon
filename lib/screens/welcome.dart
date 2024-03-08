@@ -24,7 +24,7 @@ class WelcomeScreen extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.05,
                   child: const Text(
-                    'Appathon',
+                    'MeriDairy',
                     style: TextStyle(
                       fontFamily: 'designer',
                       fontSize: 32,

@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: TextStyle(fontSize: 36),
                             ),
                             Text(
-                              'Welcome to Appathon',
+                              'Welcome to MeriDairy',
                               style: TextStyle(
                                   fontFamily: 'Couture', fontSize: 12),
                             ),
@@ -493,7 +493,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed(MyRoutes.AlertProdRoute);
+                            },
                             child: Container(
                               height: MediaQuery.of(context).size.height * 0.12,
                               width: MediaQuery.of(context).size.width * 0.4,

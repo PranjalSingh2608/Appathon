@@ -9,4 +9,6 @@ class MyRoutes {
   static String StockRoute = '/stock';
   static String QnARoute = '/qna';
   static String MarketplaceRoute = '/marketplace';
+  static String AlertProdRoute = '/alertprod';
+  static String OTPLoginRoute = '/otplogin';
 }

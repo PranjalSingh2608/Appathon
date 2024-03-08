@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/Animal_Schema.dart';
 import '../models/cattle.dart';
@@ -78,7 +79,10 @@ Future<void> registerCattle(Cattle cattle) async {
 }
 
 Future<void> milkrecord(MilkRecord milkrecord) async {
-  final String apiUrl = 'https://smiling-garment-deer.cyclic.app/createrecord';
+  final prefs = await SharedPreferences.getInstance();
+  String number = prefs.getString('phoneNo').toString();
+  final String apiUrl =
+      'https://smiling-garment-deer.cyclic.app/createrecord/$number';
 
   final http.Response response = await http.post(
     Uri.parse(apiUrl),
@@ -104,7 +108,7 @@ Future<List<AnimalSchema>> getAnimalsForUserId(String userId) async {
       Uri.parse(apiUrl),
       headers: {'Content-Type': 'application/json'},
     );
-    print(response.body); 
+    print(response.body);
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final dynamic jsonData = json.decode(response.body);
@@ -125,4 +129,3 @@ Future<List<AnimalSchema>> getAnimalsForUserId(String userId) async {
     throw Exception('Failed to load animals');
   }
 }
-

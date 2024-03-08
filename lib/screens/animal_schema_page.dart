@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/colors.dart';
+import 'package:http/http.dart' as http;
+
 import '../utils/http.dart';
 
 class AnimalSchemaScreen extends StatefulWidget {
@@ -20,6 +24,33 @@ class _AnimalSchemaScreenState extends State<AnimalSchemaScreen> {
   }
 
   List animalsData = [];
+  Future<Map<String, dynamic>> fetchMilkProduction(String animalId) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      String number = prefs.getString('phoneNo').toString();
+      final apiUrl =
+          'https://smiling-garment-deer.cyclic.app/getmilkprodbyId/$number';
+      final http.Response response = await http.post(
+        Uri.parse(apiUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({'animalId': animalId}),
+      );
+
+      if (response.statusCode == 200) {
+        final dynamic responseData = jsonDecode(response.body);
+        print(responseData);
+        return responseData;
+      } else {
+        throw Exception(
+            'Failed to fetch milk production. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+      throw e;
+    }
+  }
 
   Future<void> fetchData() async {
     try {
@@ -66,7 +97,7 @@ class _AnimalSchemaScreenState extends State<AnimalSchemaScreen> {
       ),
       body: ListView.builder(
         itemCount: animalsData.length,
-        itemBuilder: (context, index){
+        itemBuilder: (context, index) {
           final animal = animalsData[index];
           return Padding(
             padding: const EdgeInsets.only(
@@ -107,41 +138,65 @@ class _AnimalSchemaScreenState extends State<AnimalSchemaScreen> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Age : ${(-1 * animal.age).toString()} years',
-                                  style: const TextStyle(
-                                      color: Color(0xff181414),
-                                      fontFamily: 'opensans'),
-                                ),
-                                Text(
-                                  'Type : ${(animal.animalType).toString()}',
-                                  style: const TextStyle(
-                                      color: Color(0xff181414),
-                                      fontFamily: 'opensans'),
-                                ),
-                                Text(
-                                  'Breed : ${(animal.breed).toString()}',
-                                  style: const TextStyle(
-                                      color: Color(0xff181414),
-                                      fontFamily: 'opensans'),
-                                ),
-                                Text(
-                                  'Gender : ${(animal.animalGender).toString()}',
-                                  style: const TextStyle(
-                                      color: Color(0xff181414),
-                                      fontFamily: 'opensans'),
-                                ),
-                                Text(
-                                  'Weight : ${(animal.weight).toString()} kgs',
-                                  style: const TextStyle(
-                                      color: Color(0xff181414),
-                                      fontFamily: 'opensans'),
-                                ),
-                                Text(
-                                  'Milk Given : Pranjal data daal do L',
-                                  style: const TextStyle(
-                                      color: Color(0xff181414),
-                                      fontFamily: 'opensans'),
+                                FutureBuilder<Map<String, dynamic>>(
+                                  future: fetchMilkProduction(animal.animalId),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    } else if (snapshot.hasError) {
+                                      return Text('Error: ${snapshot.error}');
+                                    } else {
+                                      var totalMilkQuantity =
+                                          snapshot.data!['totalMilkQuantity'];
+                                      return Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Age : ${(-1 * animal.age).toString()} years',
+                                            style: const TextStyle(
+                                                color: Color(0xff181414),
+                                                fontFamily: 'opensans'),
+                                          ),
+                                          Text(
+                                            'Type : ${(animal.animalType).toString()}',
+                                            style: const TextStyle(
+                                                color: Color(0xff181414),
+                                                fontFamily: 'opensans'),
+                                          ),
+                                          Text(
+                                            'Breed : ${(animal.breed).toString()}',
+                                            style: const TextStyle(
+                                                color: Color(0xff181414),
+                                                fontFamily: 'opensans'),
+                                          ),
+                                          Text(
+                                            'Gender : ${(animal.animalGender).toString()}',
+                                            style: const TextStyle(
+                                                color: Color(0xff181414),
+                                                fontFamily: 'opensans'),
+                                          ),
+                                          Text(
+                                            'Weight : ${(animal.weight).toString()} kgs',
+                                            style: const TextStyle(
+                                                color: Color(0xff181414),
+                                                fontFamily: 'opensans'),
+                                          ),
+                                          Text(
+                                            'Milk Given : $totalMilkQuantity L',
+                                            style: const TextStyle(
+                                              color: Color(0xff181414),
+                                              fontFamily: 'opensans',
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    }
+                                  },
                                 ),
                               ],
                             ),

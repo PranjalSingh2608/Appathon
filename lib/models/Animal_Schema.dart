@@ -4,6 +4,7 @@ class AnimalSchema {
   String animalId;
   // int numberOfChilds;
   String animalType;
+  int? totalMilkQuantity;
   String breed;
   String animalGender;
   DateTime DOB;

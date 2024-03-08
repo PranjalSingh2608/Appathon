@@ -48,7 +48,7 @@ class _QnAPageState extends State<QnAPage> {
               onPressed: () async {
                 await postAnswer(questionId, answer);
                 Navigator.of(context).pop();
-                fetchQnAData(); // Refresh after posting an answer
+                fetchQnAData(); 
               },
               child: Text('Post Answer'),
             ),
