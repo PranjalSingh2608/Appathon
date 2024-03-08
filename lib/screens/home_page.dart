@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:appathon/main.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intl/intl.dart';
 
 import 'package:appathon/utils/colors.dart';
 import 'package:appathon/utils/routes.dart';

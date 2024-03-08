@@ -27,4 +27,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get learn => 'Learn';
+
+  @override
+  String get stockAlert => 'Stock Alert';
+
+  @override
+  String get premium => 'Premium';
 }
