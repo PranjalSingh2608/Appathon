@@ -1,6 +1,7 @@
 import 'package:appathon/screens/home_page.dart';
 import 'package:appathon/screens/login_page.dart';
 import 'package:appathon/screens/signup_page.dart';
+import 'package:appathon/screens/welcome.dart';
 import 'package:appathon/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -28,8 +29,9 @@ class MyApp extends StatelessWidget {
         //       ),
         // ),
       ),
-      initialRoute: '/signup',
+      initialRoute: '/welcome',
       routes: {
+        MyRoutes.WelcomeRoute: (context) => WelcomeScreen(),
         MyRoutes.HomeRoute: (context) => HomeScreen(),
         MyRoutes.SignUpRoute: (context) => SignUpScreen(),
         MyRoutes.LoginRoute: (context) => LoginScreen(),
