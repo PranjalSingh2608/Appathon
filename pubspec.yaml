@@ -42,11 +42,11 @@ dependencies:
   pinput: ^2.2.20
   dropdown_button2: ^2.3.9
   url_launcher: 6.1.5
-  dash_chat_2: ^0.0.19
   intl: any
   flutter_localizations:
     sdk: flutter
 
+  flutter_tts: ^3.2.0
 
 dev_dependencies:
   flutter_test:

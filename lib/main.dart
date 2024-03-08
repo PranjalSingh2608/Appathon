@@ -7,6 +7,8 @@ import 'package:appathon/screens/login_page.dart';
 import 'package:appathon/screens/marketplacescreen.dart';
 import 'package:appathon/screens/milk_record_page.dart';
 import 'package:appathon/screens/otp_page_login.dart';
+import 'package:appathon/screens/premium_page.dart';
+import 'package:appathon/screens/profile_page.dart';
 import 'package:appathon/screens/qna_page.dart';
 import 'package:appathon/screens/register_page.dart';
 import 'package:appathon/screens/stock_page.dart';
@@ -87,6 +89,8 @@ class _MyAppState extends State<MyApp> {
         MyRoutes.AlertProdRoute: (context) => AlertProdScreen(),
         MyRoutes.OTPLoginRoute: (context) => OTPLoginScreen(),
         MyRoutes.LearnPageRoute: (context) => LearnPage(),
+        MyRoutes.ProfilePageRoute: (context) => ProfilePage(),
+        MyRoutes.PremiumPageRoute: (context) => PremiumPage(),
       },
     );
   }

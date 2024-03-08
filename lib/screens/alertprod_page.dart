@@ -66,12 +66,12 @@ class _AlertProdScreenState extends State<AlertProdScreen> {
             Container(
                 width: 35,
                 height: 35,
-                child: Image.asset('assets/images/milk1.png')),
+                child: Image.asset('assets/images/alert0.png')),
             SizedBox(
               width: 10,
             ),
             Text(
-              'Milk Record',
+              'Stock Alert',
               style: TextStyle(
                   fontFamily: 'Europa', fontSize: 28, color: MyColors.col3),
             ),
@@ -86,8 +86,12 @@ class _AlertProdScreenState extends State<AlertProdScreen> {
           return ListTile(
             title: Text(
               'Animal ID: ${product['animalIdentificationNumber']}',
+              style: TextStyle(fontFamily: 'opensans'),
             ),
-            subtitle: Text('Milking Date: ${product['milkingDate']}'),
+            subtitle: Text(
+              'Milking Date: ${product['milkingDate'].toString().substring(0, 10)}',
+              style: TextStyle(fontFamily: 'opensans'),
+            ),
           );
         },
       ),
