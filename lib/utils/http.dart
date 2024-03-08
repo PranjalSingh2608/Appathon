@@ -106,11 +106,16 @@ Future<List<AnimalSchema>> getAnimalsForUserId(String userId) async {
     );
 
     if (response.statusCode == 200 || response.statusCode == 201) {
-      final List<dynamic> jsonData = json.decode(response.body);
-      List<AnimalSchema> animals =
-          jsonData.map((json) => AnimalSchema.fromJson(json)).toList();
-      print(animals);
-      return animals;
+      final dynamic jsonData = json.decode(response.body);
+      if (jsonData is Map<String, dynamic> &&
+          jsonData.containsKey('animalProfiles')) {
+        List<AnimalSchema> animals = (jsonData['animalProfiles'] as List)
+            .map((json) => AnimalSchema.fromJson(json))
+            .toList();
+        return animals;
+      } else {
+        throw Exception('Invalid response format. Expected a List.');
+      }
     } else {
       throw Exception('Failed to load animals');
     }

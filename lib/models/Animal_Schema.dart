@@ -46,11 +46,12 @@ class AnimalSchema {
       animalGender: json['animalGender'],
       DOB: DateTime.parse(json['DOB']),
       age: json['age'],
-      animalGirth: json['animalGirth'],
-      weight: json['weight'],
+      animalGirth: (json['animalGirth'] as num).toDouble(),
+      weight: (json['weight'] as num).toDouble(),
       pregnancyStatus: json['pregnancyStatus'],
       lastCalving: DateTime.parse(json['lastCalving']),
-      lastDateOfAutoInsemination: DateTime.parse(json['lastDateOfAutoInsemination']),
+      lastDateOfAutoInsemination:
+          DateTime.parse(json['lastDateOfAutoInsemination']),
       lactationNumber: json['lactationNumber'],
       currentMilkingStage: json['currentMilkingStage'],
     );
