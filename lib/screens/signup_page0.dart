@@ -1,5 +1,6 @@
 import 'package:appathon/screens/signup_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/colors.dart';
 
@@ -77,6 +78,9 @@ class _SignUpScreen0State extends State<SignUpScreen0> {
           SizedBox(height: 16),
           ElevatedButton(
             onPressed: () async {
+              final String phoneNo = phoneController.text;
+              final prefs = await SharedPreferences.getInstance();
+              prefs.setString('phoneNo', phoneNo);
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => SignUpScreen(
