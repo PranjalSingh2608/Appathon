@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class AuthService {
   final String baseUrl = 'https://smiling-garment-deer.cyclic.app';
   Future<bool> registerUser(
-      String username, String otp, String phoneNo, String address) async {
+      String username, String otp, String phoneNo) async {
     final url = Uri.parse('$baseUrl/signup');
     print(url);
     final response = await http.post(
@@ -14,8 +14,7 @@ class AuthService {
       body: json.encode({
         "username": username,
         "otp": otp,
-        "phoneNo": phoneNo,
-        "address": address
+        "phoneNo": phoneNo
       }),
     );
 
