@@ -1,3 +1,4 @@
+import 'package:appathon/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/http.dart';
@@ -17,10 +18,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        title: Text('Login'),
-        backgroundColor: Color(0xff3EB489),
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -113,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           TextButton(
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed('/register');
+              Navigator.of(context).pushReplacementNamed(MyRoutes.SignUpRoute);
             },
             child: Text(
               'Not a user yet? Register here',

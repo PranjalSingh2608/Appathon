@@ -14,65 +14,119 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController _countryCode = TextEditingController();
+  @override
+  void initState() {
+    _countryCode.text = "+91";
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        title: Text(
-          'Register',
-          style: TextStyle(
-            fontFamily: 'Europa',
-            fontSize: 32,
-          ),
-        ),
-        backgroundColor: MyColors.col3,
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SingleChildScrollView(
-            child: Card(
-              color: Theme.of(context).backgroundColor.withOpacity(0.95),
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    TextField(
-                      controller: usernameController,
-                      decoration: InputDecoration(
-                        labelText: 'Username',
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: MyColors.col2,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 16), // Add some vertical spacing
-                    TextField(
-                      controller: phoneController,
-                      decoration: InputDecoration(
-                        labelText: 'Phone Number',
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: MyColors.col2,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                      ),
-                    ),
-                  ],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Phone Authentication',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'europa',
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-              ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  'You need to authenticate before getting started!',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'opensans',
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                    ),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Colors.grey,
+                        ),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16),
+                      child: TextField(
+                        controller: phoneController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Phone',
+                          hintStyle: TextStyle(
+                            fontFamily: 'opensans',
+                            fontSize: 16,
+                          ),
+                        ),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'opensans',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                    ),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Colors.grey,
+                        ),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16),
+                      child: TextField(
+                        controller: usernameController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Username',
+                          hintStyle: TextStyle(
+                            fontFamily: 'opensans',
+                            fontSize: 16,
+                          ),
+                        ),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'opensans',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
           SizedBox(height: 16),
@@ -92,33 +146,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
               );
             },
             child: Container(
-              width: MediaQuery.of(context).size.width / 2,
-              padding: EdgeInsets.symmetric(vertical: 16),
+              width: MediaQuery.of(context).size.width * 0.4,
               child: Center(
                 child: Text(
                   'Register',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     color: Colors.white,
                   ),
                 ),
               ),
             ),
             style: ElevatedButton.styleFrom(
-              primary: MyColors.col2,
+              primary: MyColors.col3,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
+                borderRadius: BorderRadius.circular(40.0),
               ),
               elevation: 4,
             ),
           ),
-          SizedBox(height: 16),
+          // SizedBox(height: 10),
           TextButton(
             onPressed: () {
               Navigator.of(context).pushReplacementNamed('/login');
             },
             child: Text(
-              'Already a user? Log in here',
+              'Already a user ? Login here',
               style: TextStyle(
                 color: MyColors.col2,
               ),
