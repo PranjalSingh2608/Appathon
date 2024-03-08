@@ -26,10 +26,19 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  final TextEditingController milkSoldController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.background,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {});
+        },
+        backgroundColor: MyColors.col3,
+        child: Image.asset('assets/images/chatbot0.png'),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -70,7 +79,49 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                //
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                    ),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Colors.grey,
+                        ),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16),
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        controller: milkSoldController,
+                        decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.send,
+                              )),
+                          border: InputBorder.none,
+                          hintText: 'Enter Milk Sold',
+                          hintStyle: TextStyle(
+                            fontFamily: 'opensans',
+                            fontSize: 16,
+                          ),
+                        ),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'opensans',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.01,
+                ),
                 Container(
                     // height: MediaQuery.of(context).size.height * 0.74,
                     child: Padding(
