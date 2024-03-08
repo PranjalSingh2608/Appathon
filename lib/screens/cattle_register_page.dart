@@ -1,4 +1,5 @@
 import 'package:appathon/utils/http.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -100,13 +101,14 @@ class _CattleRegisterState extends State<CattleRegister> {
                       TextField(
                         controller: animalIdController,
                         decoration: InputDecoration(
-                          labelText: 'Animal ID',
+                          labelText: 'Animal Identification Number',
+                          labelStyle: TextStyle(fontSize: 20.0),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: MyColors.col2,
                               width: 2,
                             ),
-                            borderRadius: BorderRadius.circular(30.0),
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
                         ),
                       ),
@@ -130,7 +132,7 @@ class _CattleRegisterState extends State<CattleRegister> {
                         children: [
                           Text(
                             'Animal Type',
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(fontSize: 18),
                           ),
                           Row(
                             children: [
@@ -143,7 +145,16 @@ class _CattleRegisterState extends State<CattleRegister> {
                                   });
                                 },
                               ),
-                              Text('Buffalo'),
+                              Text(
+                                'Buffalo',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'opensans',
+                                ),
+                              ),
+                              SizedBox(
+                                width: 12,
+                              ),
                               Radio<String>(
                                 value: 'Cow',
                                 groupValue: animalType,
@@ -153,7 +164,16 @@ class _CattleRegisterState extends State<CattleRegister> {
                                   });
                                 },
                               ),
-                              Text('Cow'),
+                              Text(
+                                'Cow',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'opensans',
+                                ),
+                              ),
+                              SizedBox(
+                                width: 12,
+                              ),
                             ],
                           ),
                         ],
@@ -171,7 +191,6 @@ class _CattleRegisterState extends State<CattleRegister> {
                       //     ),
                       //   ),
                       // ),
-                      SizedBox(height: 16),
 
                       SizedBox(height: 16),
                       // TextField(
@@ -192,7 +211,7 @@ class _CattleRegisterState extends State<CattleRegister> {
                         children: [
                           Text(
                             'Animal Gender',
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(fontSize: 18),
                           ),
                           Row(
                             children: [
@@ -205,7 +224,16 @@ class _CattleRegisterState extends State<CattleRegister> {
                                   });
                                 },
                               ),
-                              Text('Male'),
+                              Text(
+                                'Male',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'opensans',
+                                ),
+                              ),
+                              SizedBox(
+                                width: 12,
+                              ),
                               Radio<String>(
                                 value: 'Female',
                                 groupValue: gender,
@@ -215,7 +243,16 @@ class _CattleRegisterState extends State<CattleRegister> {
                                   });
                                 },
                               ),
-                              Text('Female'),
+                              Text(
+                                'Female',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'opensans',
+                                ),
+                              ),
+                              SizedBox(
+                                width: 12,
+                              ),
                             ],
                           ),
                         ],
@@ -243,12 +280,13 @@ class _CattleRegisterState extends State<CattleRegister> {
                         },
                         decoration: InputDecoration(
                           labelText: 'Animal DOB',
+                          labelStyle: TextStyle(fontSize: 20.0),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: MyColors.col3,
                               width: 2,
                             ),
-                            borderRadius: BorderRadius.circular(30.0),
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
                           suffixIcon: IconButton(
                             onPressed: () async {
@@ -292,12 +330,13 @@ class _CattleRegisterState extends State<CattleRegister> {
                         controller: weightController,
                         decoration: InputDecoration(
                           labelText: 'Animal Weight',
+                          labelStyle: TextStyle(fontSize: 20.0),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: MyColors.col3,
                               width: 2,
                             ),
-                            borderRadius: BorderRadius.circular(30.0),
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
                         ),
                       ),
@@ -310,16 +349,27 @@ class _CattleRegisterState extends State<CattleRegister> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'Breed',
-                              style: TextStyle(fontSize: 16),
+                              style: TextStyle(fontSize: 18),
                             ),
                           ),
                           Container(
                             alignment: Alignment.centerLeft,
-                            child: DropdownButton<String>(
+                            color: MyColors.background,
+                            child: DropdownButton2<String>(
+                              dropdownStyleData: DropdownStyleData(
+                                  decoration: BoxDecoration(
+                                      color: MyColors.background,
+                                      borderRadius: BorderRadius.circular(10))),
                               isExpanded: true,
                               alignment: AlignmentDirectional.centerStart,
                               value: selectedBreed,
-                              hint: Text('Select Breed'),
+                              hint: Text(
+                                'Select Breed',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'opensans',
+                                ),
+                              ),
                               onChanged: (value) {
                                 setState(() {
                                   selectedBreed = value;
@@ -328,7 +378,13 @@ class _CattleRegisterState extends State<CattleRegister> {
                               items: breeds.map((breed) {
                                 return DropdownMenuItem<String>(
                                   value: breed,
-                                  child: Text(breed),
+                                  child: Text(
+                                    breed,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontFamily: 'opensans',
+                                    ),
+                                  ),
                                 );
                               }).toList(),
                             ),
@@ -472,14 +528,14 @@ class _CattleRegisterState extends State<CattleRegister> {
                           }
                         },
                         child: Container(
-                          width: MediaQuery.of(context).size.width / 2,
-                          padding: EdgeInsets.symmetric(vertical: 16),
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          // padding: EdgeInsets.symmetric(vertical: 16),
                           child: Center(
                             child: Text(
-                              'Register',
+                              'Register Cattle',
                               style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
+                                fontSize: 16,
+                                color: MyColors.background,
                               ),
                             ),
                           ),
@@ -487,7 +543,7 @@ class _CattleRegisterState extends State<CattleRegister> {
                         style: ElevatedButton.styleFrom(
                           primary: MyColors.col3,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
+                            borderRadius: BorderRadius.circular(40.0),
                           ),
                           elevation: 4,
                         ),

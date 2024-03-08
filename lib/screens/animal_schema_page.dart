@@ -68,93 +68,101 @@ class _AnimalSchemaScreenState extends State<AnimalSchemaScreen> {
         itemCount: animalsData.length,
         itemBuilder: (context, index) {
           final animal = animalsData[index];
-          return Card(
-            child: ListTile(
-              leading: Container(
-                // width: 40,
-                // height: 40,
-                child: Image.asset(
-                  'assets/images/cow1.png',
-                  scale: 0.1,
-                  fit: BoxFit.contain,
+          return Padding(
+            padding: const EdgeInsets.only(
+              left: 12,
+              right: 12,
+            ),
+            child: Card(
+              child: ListTile(
+                leading: Container(
+                  // width: 40,
+                  // height: 40,
+                  child: Image.asset(
+                    'assets/images/cow1.png',
+                    scale: 0.1,
+                    fit: BoxFit.contain,
+                  ),
                 ),
-              ),
-              title: Text('Cattle ID - ${animal.animalId}'),
-              subtitle: Text(
-                'Cattle Type - ${animal.animalType}',
-                style: TextStyle(fontFamily: 'couture'),
-              ),
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      backgroundColor: MyColors.background,
-                      title: Text(
-                        'Cattle: ${animal.animalId}',
-                        style: const TextStyle(
-                            color: Color(0xff181414), fontFamily: 'couture'),
-                      ),
-                      content: Container(
-                        height: MediaQuery.of(context).size.height * 0.17,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Age : ${(-1 * animal.age).toString()} years',
-                              style: const TextStyle(
-                                  color: Color(0xff181414),
-                                  fontFamily: 'opensans'),
-                            ),
-                            Text(
-                              'Type : ${(animal.animalType).toString()}',
-                              style: const TextStyle(
-                                  color: Color(0xff181414),
-                                  fontFamily: 'opensans'),
-                            ),
-                            Text(
-                              'Breed : ${(animal.breed).toString()}',
-                              style: const TextStyle(
-                                  color: Color(0xff181414),
-                                  fontFamily: 'opensans'),
-                            ),
-                            Text(
-                              'Gender : ${(animal.animalGender).toString()}',
-                              style: const TextStyle(
-                                  color: Color(0xff181414),
-                                  fontFamily: 'opensans'),
-                            ),
-                            Text(
-                              'Weight : ${(animal.weight).toString()} kgs',
-                              style: const TextStyle(
-                                  color: Color(0xff181414),
-                                  fontFamily: 'opensans'),
-                            ),
-                            Text(
-                              'Milk Given : Pranjal data daal do L',
-                              style: const TextStyle(
-                                  color: Color(0xff181414),
-                                  fontFamily: 'opensans'),
-                            ),
-                          ],
+                title: Text('Cattle ID - ${animal.animalId}'),
+                subtitle: Text(
+                  'Cattle Type - ${animal.animalType}',
+                  style: TextStyle(fontFamily: 'couture'),
+                ),
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        backgroundColor: MyColors.background,
+                        title: Text(
+                          'Cattle: ${animal.animalId}',
+                          style: const TextStyle(
+                              color: Color(0xff181414), fontFamily: 'couture'),
                         ),
-                      ),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(); // Close the dialog
-                          },
-                          child: Text(
-                            'Go Back',
-                            style: TextStyle(color: MyColors.col2),
+                        content: SingleChildScrollView(
+                          child: Container(
+                            // height: MediaQuery.of(context).size.height * 0.2,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Age : ${(-1 * animal.age).toString()} years',
+                                  style: const TextStyle(
+                                      color: Color(0xff181414),
+                                      fontFamily: 'opensans'),
+                                ),
+                                Text(
+                                  'Type : ${(animal.animalType).toString()}',
+                                  style: const TextStyle(
+                                      color: Color(0xff181414),
+                                      fontFamily: 'opensans'),
+                                ),
+                                Text(
+                                  'Breed : ${(animal.breed).toString()}',
+                                  style: const TextStyle(
+                                      color: Color(0xff181414),
+                                      fontFamily: 'opensans'),
+                                ),
+                                Text(
+                                  'Gender : ${(animal.animalGender).toString()}',
+                                  style: const TextStyle(
+                                      color: Color(0xff181414),
+                                      fontFamily: 'opensans'),
+                                ),
+                                Text(
+                                  'Weight : ${(animal.weight).toString()} kgs',
+                                  style: const TextStyle(
+                                      color: Color(0xff181414),
+                                      fontFamily: 'opensans'),
+                                ),
+                                Text(
+                                  'Milk Given : Pranjal data daal do L',
+                                  style: const TextStyle(
+                                      color: Color(0xff181414),
+                                      fontFamily: 'opensans'),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ],
-                    );
-                  },
-                );
-              },
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop(); // Close the dialog
+                            },
+                            child: Text(
+                              'Go Back',
+                              style: TextStyle(color: MyColors.col2),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           );
         },
