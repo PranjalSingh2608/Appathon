@@ -184,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Icons.send,
                               )),
                           border: InputBorder.none,
-                          hintText: 'Enter Milk Sold',
+                          hintText: 'Enter Milk Sold (in Litres)',
                           hintStyle: TextStyle(
                             fontFamily: 'opensans',
                             fontSize: 16,
