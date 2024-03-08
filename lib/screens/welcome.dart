@@ -8,6 +8,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MyColors.background,
       body: SafeArea(
         child: Container(
           margin: const EdgeInsets.only(

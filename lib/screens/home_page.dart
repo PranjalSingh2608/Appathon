@@ -145,14 +145,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MediaQuery.of(context).size.width *
                                                 0.4,
                                         child: Image.asset(
-                                            'assets/images/cow0.png'),
+                                            'assets/images/cow1.png'),
                                       ),
                                       SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height *
                                                 0.01,
                                       ),
-                                      Text('Animal Archieves'),
+                                      Text('Animal Archives'),
                                     ],
                                   ),
                                 ),
@@ -188,14 +188,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MediaQuery.of(context).size.width *
                                                 0.4,
                                         child: Image.asset(
-                                            'assets/images/cow0.png'),
+                                            'assets/images/milk0.png'),
                                       ),
                                       SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height *
                                                 0.01,
                                       ),
-                                      Text('Milk Record'),
+                                      Text('Register Milk Record'),
                                     ],
                                   ),
                                 ),
@@ -223,14 +223,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MediaQuery.of(context).size.width *
                                                 0.4,
                                         child: Image.asset(
-                                            'assets/images/cow0.png'),
+                                            'assets/images/milk1.png'),
                                       ),
                                       SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height *
                                                 0.01,
                                       ),
-                                      Text('Register Cattle'),
+                                      Text('Milk Record'),
                                     ],
                                   ),
                                 ),
