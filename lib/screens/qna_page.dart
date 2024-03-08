@@ -227,51 +227,141 @@ class _QnAPageState extends State<QnAPage> {
             width: 40,
             child: Image.asset('assets/images/qna1.png')),
       ),
-      body: ListView.builder(
-        itemCount: qnaList.length,
-        itemBuilder: (context, index) {
-          final qna = qnaList[index];
-          final question = qna['question'];
-          final qasker = qna['qasker'];
-          final answer = qna['answer'];
+      body: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: ListView.builder(
+          itemCount: qnaList.length,
+          itemBuilder: (context, index) {
+            final qna = qnaList[index];
+            final question = qna['question'];
+            final qasker = qna['qasker'];
+            final answer = qna['answer'];
 
-          return InkWell(
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    backgroundColor: MyColors.background,
-                    title: Text(
-                      'Details',
-                      style: const TextStyle(
-                          color: Color(0xff181414), fontFamily: 'couture'),
-                    ),
-                    content: SingleChildScrollView(
-                      child: Container(
-                        // height: MediaQuery.of(context).size.height * 0.2,
+            return InkWell(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      backgroundColor: MyColors.background,
+                      title: Text(
+                        'Details',
+                        style: const TextStyle(
+                            color: Color(0xff181414), fontFamily: 'couture'),
+                      ),
+                      content: SingleChildScrollView(
+                        child: Container(
+                          // height: MediaQuery.of(context).size.height * 0.2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                question,
+                                style: const TextStyle(
+                                    color: Color(0xff181414),
+                                    fontFamily: 'opensans'),
+                              ),
+                              if (answer != "")
+                                Text(
+                                  'Answer: $answer',
+                                  style: TextStyle(
+                                    fontFamily: 'OpenSans',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                )
+                              else
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.4,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: MyColors.col3,
+                                        ),
+                                        onPressed: () {
+                                          showAnswerDialog(qna['_id']);
+                                        },
+                                        child: const Text(
+                                          'Post Answer',
+                                          style: TextStyle(
+                                            fontFamily: 'OpenSans',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                          child: Text(
+                            'Go Back',
+                            style: TextStyle(color: MyColors.col2),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: Card(
+                margin: EdgeInsets.all(8),
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width * 0.1,
+                        child: Image.asset('assets/images/user0.png'),
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.02,
+                      ),
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
-                              question,
-                              style: const TextStyle(
-                                  color: Color(0xff181414),
-                                  fontFamily: 'opensans'),
+                            ClipRect(
+                              child: Text(
+                                'Question: $question',
+                                style: TextStyle(
+                                    fontFamily: 'OpenSans',
+                                    fontWeight: FontWeight.bold),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
+                            // SizedBox(height: 8),
+                            ClipRRect(
+                              child: Text(
+                                'Asked by: $qasker',
+                                style: TextStyle(
+                                  fontFamily: 'OpenSans',
+                                  color: Colors.grey,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            Divider(),
                             if (answer != "")
                               Text(
                                 'Answer: $answer',
-                                style: TextStyle(
-                                  fontFamily: 'OpenSans',
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                style: TextStyle(fontFamily: 'OpenSans'),
                               )
                             else
                               Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   SizedBox(
                                     width:
@@ -298,100 +388,13 @@ class _QnAPageState extends State<QnAPage> {
                           ],
                         ),
                       ),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop(); // Close the dialog
-                        },
-                        child: Text(
-                          'Go Back',
-                          style: TextStyle(color: MyColors.col2),
-                        ),
-                      ),
                     ],
-                  );
-                },
-              );
-            },
-            child: Card(
-              margin: EdgeInsets.all(8),
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width * 0.1,
-                      child: Image.asset('assets/images/user0.png'),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.02,
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRect(
-                            child: Text(
-                              'Question: $question',
-                              style: TextStyle(
-                                  fontFamily: 'OpenSans',
-                                  fontWeight: FontWeight.bold),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          // SizedBox(height: 8),
-                          ClipRRect(
-                            child: Text(
-                              'Asked by: $qasker',
-                              style: TextStyle(
-                                fontFamily: 'OpenSans',
-                                color: Colors.grey,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          Divider(),
-                          if (answer != "")
-                            Text(
-                              'Answer: $answer',
-                              style: TextStyle(fontFamily: 'OpenSans'),
-                            )
-                          else
-                            Column(
-                              children: [
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: MyColors.col3,
-                                    ),
-                                    onPressed: () {
-                                      showAnswerDialog(qna['_id']);
-                                    },
-                                    child: const Text(
-                                      'Post Answer',
-                                      style: TextStyle(
-                                        fontFamily: 'OpenSans',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

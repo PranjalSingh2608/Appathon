@@ -41,6 +41,7 @@ dependencies:
   pinput: ^2.2.20
   dropdown_button2: ^2.3.9
   url_launcher: 6.1.5
+  flutter_tts: ^3.2.0
 
 dev_dependencies:
   flutter_test:

@@ -177,7 +177,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              MyRoutes.ProfilePageRoute,
+                            );
+                          },
                           icon: Image.asset('assets/images/user0.png'),
                         )
                       ],
@@ -548,14 +553,57 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MediaQuery.of(context).size.width *
                                                 0.4,
                                         child: Image.asset(
-                                            'assets/images/marketplace0.png'),
+                                            'assets/images/alert0.png'),
                                       ),
                                       SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height *
                                                 0.01,
                                       ),
-                                      Text('Marketplace'),
+                                      Text('Stock Alert'),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, MyRoutes.PremiumPageRoute);
+                            },
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.12,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: Card(
+                                elevation: 4,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.06,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
+                                        child: Image.asset(
+                                            'assets/images/premium.png'),
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.01,
+                                      ),
+                                      Text('Premium'),
                                     ],
                                   ),
                                 ),
