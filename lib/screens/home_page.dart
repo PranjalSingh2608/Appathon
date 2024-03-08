@@ -283,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MediaQuery.of(context).size.height *
                                                 0.01,
                                       ),
-                                      Text('Animal Archives'),
+                                      Text('Cattle Archives'),
                                     ],
                                   ),
                                 ),

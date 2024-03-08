@@ -19,12 +19,18 @@ class _AnimalSchemaScreenState extends State<AnimalSchemaScreen> {
     fetchData();
   }
 
+  List animalsData = [];
+
   Future<void> fetchData() async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final userId = prefs.getString('phoneNo').toString();
       final animals = await getAnimalsForUserId(userId);
       print('Received animals: $animals');
+      setState(() {
+        print(animals[0].breed);
+        animalsData = animals;
+      });
     } catch (error) {
       print('Error fetching animals: $error');
     }
@@ -33,27 +39,125 @@ class _AnimalSchemaScreenState extends State<AnimalSchemaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MyColors.background,
       appBar: AppBar(
-        title: Text(
-          'Animal Schema',
-          style: TextStyle(
-            fontFamily: 'Europa',
-            fontSize: 32,
-          ),
+        titleSpacing: 0.0,
+        iconTheme: IconThemeData(
+          color: MyColors.col3,
+          size: 40,
         ),
-        backgroundColor: MyColors.col3,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
+        title: Row(
           children: [
-            SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Card(),
-              ),
+            Container(
+                width: 35,
+                height: 35,
+                child: Image.asset('assets/images/cow1.png')),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Cattle Archives',
+              style: TextStyle(
+                  fontFamily: 'Europa', fontSize: 28, color: MyColors.col3),
             ),
           ],
         ),
+        backgroundColor: MyColors.background,
+      ),
+      body: ListView.builder(
+        itemCount: animalsData.length,
+        itemBuilder: (context, index) {
+          final animal = animalsData[index];
+          return Card(
+            child: ListTile(
+              leading: Container(
+                // width: 40,
+                // height: 40,
+                child: Image.asset(
+                  'assets/images/cow1.png',
+                  scale: 0.1,
+                  fit: BoxFit.contain,
+                ),
+              ),
+              title: Text('Cattle ID - ${animal.animalId}'),
+              subtitle: Text(
+                'Cattle Type - ${animal.animalType}',
+                style: TextStyle(fontFamily: 'couture'),
+              ),
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      backgroundColor: MyColors.background,
+                      title: Text(
+                        'Cattle: ${animal.animalId}',
+                        style: const TextStyle(
+                            color: Color(0xff181414), fontFamily: 'couture'),
+                      ),
+                      content: Container(
+                        height: MediaQuery.of(context).size.height * 0.17,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Age : ${(-1 * animal.age).toString()} years',
+                              style: const TextStyle(
+                                  color: Color(0xff181414),
+                                  fontFamily: 'opensans'),
+                            ),
+                            Text(
+                              'Type : ${(animal.animalType).toString()}',
+                              style: const TextStyle(
+                                  color: Color(0xff181414),
+                                  fontFamily: 'opensans'),
+                            ),
+                            Text(
+                              'Breed : ${(animal.breed).toString()}',
+                              style: const TextStyle(
+                                  color: Color(0xff181414),
+                                  fontFamily: 'opensans'),
+                            ),
+                            Text(
+                              'Gender : ${(animal.animalGender).toString()}',
+                              style: const TextStyle(
+                                  color: Color(0xff181414),
+                                  fontFamily: 'opensans'),
+                            ),
+                            Text(
+                              'Weight : ${(animal.weight).toString()} kgs',
+                              style: const TextStyle(
+                                  color: Color(0xff181414),
+                                  fontFamily: 'opensans'),
+                            ),
+                            Text(
+                              'Milk Given : Pranjal data daal do L',
+                              style: const TextStyle(
+                                  color: Color(0xff181414),
+                                  fontFamily: 'opensans'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                          child: Text(
+                            'Go Back',
+                            style: TextStyle(color: MyColors.col2),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }
