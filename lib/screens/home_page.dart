@@ -7,6 +7,9 @@ import 'package:appathon/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
+
+import '../utils/http.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,14 +26,13 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
- void changeLanguage(Locale locale) async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setString('languageCode', locale.languageCode);
+  void changeLanguage(Locale locale) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('languageCode', locale.languageCode);
 
-  // Update the locale for the current context
-  MyApp.setLocale(context, locale);
-}
-
+    // Update the locale for the current context
+    MyApp.setLocale(context, locale);
+  }
 
   void loadUsername() async {
     final prefs = await SharedPreferences.getInstance();
@@ -144,6 +146,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Future<void> _launchUrl(Uri _url) async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final AppLocalizations appLocalizations = AppLocalizations.of(context);
@@ -178,9 +186,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       backgroundColor: MyColors.background,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          String response = await sendMsg();
+          _launchUrl(Uri.parse(response));
+        },
         backgroundColor: MyColors.col3,
-        child: Image.asset('assets/images/chatbot0.png'),
+        child: Image.asset('assets/images/whatsapp.png'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
