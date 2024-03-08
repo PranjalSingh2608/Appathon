@@ -24,14 +24,13 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
- void changeLanguage(Locale locale) async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setString('languageCode', locale.languageCode);
+  void changeLanguage(Locale locale) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('languageCode', locale.languageCode);
 
-  // Update the locale for the current context
-  MyApp.setLocale(context, locale);
-}
-
+    // Update the locale for the current context
+    MyApp.setLocale(context, locale);
+  }
 
   void loadUsername() async {
     final prefs = await SharedPreferences.getInstance();
@@ -149,34 +148,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final AppLocalizations appLocalizations = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: MyColors.background,
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            ListTile(
-              title: Text('English'),
-              onTap: () {
-                changeLanguage(const Locale('en', ''));
-              },
-            ),
-            ListTile(
-              title: Text('Hindi'),
-              onTap: () {
-                changeLanguage(const Locale('hi', ''));
-              },
-            ),
-            ListTile(
-              title: Text('Telugu'),
-              onTap: () {
-                changeLanguage(const Locale('te', ''));
-              },
-            ),
-          ],
-        ),
-      ),
       backgroundColor: MyColors.background,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -199,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       right: 16,
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,6 +186,56 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text(
+                                    'Select Language',
+                                    style: TextStyle(fontFamily: 'Couture'),
+                                  ),
+                                  backgroundColor: MyColors.background,
+                                  content: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      ListTile(
+                                        title: Text('English'),
+                                        onTap: () {
+                                          changeLanguage(
+                                              const Locale('en', ''));
+                                        },
+                                      ),
+                                      ListTile(
+                                        title: Text('Hindi'),
+                                        onTap: () {
+                                          changeLanguage(
+                                              const Locale('hi', ''));
+                                        },
+                                      ),
+                                      ListTile(
+                                        title: Text('Telugu'),
+                                        onTap: () {
+                                          changeLanguage(
+                                              const Locale('te', ''));
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          icon: Image.asset(
+                            'assets/images/language.png',
+                          ),
+                        ),
                         IconButton(
                           onPressed: () {
                             Navigator.pushNamed(
@@ -223,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           },
                           icon: Image.asset('assets/images/user0.png'),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -293,14 +314,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   .pushNamed(MyRoutes.CattleRegisterRoute);
                             },
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.12,
-                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.14,
+                              width: MediaQuery.of(context).size.width * 0.41,
                               child: Card(
                                 elevation: 4,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: Column(
                                     children: [
                                       Container(
@@ -331,14 +352,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   .pushNamed(MyRoutes.AnimalSchemaRoute);
                             },
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.12,
-                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.14,
+                              width: MediaQuery.of(context).size.width * 0.41,
                               child: Card(
                                 elevation: 4,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: Column(
                                     children: [
                                       Container(
@@ -374,14 +395,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   .pushNamed(MyRoutes.MilkRecordRoute);
                             },
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.12,
-                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.14,
+                              width: MediaQuery.of(context).size.width * 0.41,
                               child: Card(
                                 elevation: 4,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: Column(
                                     children: [
                                       Container(
@@ -412,14 +433,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   .pushNamed(MyRoutes.StockRoute);
                             },
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.12,
-                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.14,
+                              width: MediaQuery.of(context).size.width * 0.41,
                               child: Card(
                                 elevation: 4,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: Column(
                                     children: [
                                       Container(
@@ -455,14 +476,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   .pushNamed(MyRoutes.QnARoute);
                             },
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.12,
-                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.14,
+                              width: MediaQuery.of(context).size.width * 0.41,
                               child: Card(
                                 elevation: 4,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: Column(
                                     children: [
                                       Container(
@@ -493,14 +514,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context, MyRoutes.MarketplaceRoute);
                             },
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.12,
-                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.14,
+                              width: MediaQuery.of(context).size.width * 0.41,
                               child: Card(
                                 elevation: 4,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: Column(
                                     children: [
                                       Container(
@@ -536,14 +557,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context, MyRoutes.LearnPageRoute);
                             },
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.12,
-                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.14,
+                              width: MediaQuery.of(context).size.width * 0.41,
                               child: Card(
                                 elevation: 4,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: Column(
                                     children: [
                                       Container(
@@ -574,12 +595,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   .pushNamed(MyRoutes.AlertProdRoute);
                             },
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.12,
-                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.14,
+                              width: MediaQuery.of(context).size.width * 0.41,
                               child: Card(
                                 elevation: 4,
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
+                                    borderRadius: BorderRadius.circular(12)),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
@@ -617,14 +638,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context, MyRoutes.PremiumPageRoute);
                             },
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.12,
-                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.14,
+                              width: MediaQuery.of(context).size.width * 0.41,
                               child: Card(
                                 elevation: 4,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: Column(
                                     children: [
                                       Container(
