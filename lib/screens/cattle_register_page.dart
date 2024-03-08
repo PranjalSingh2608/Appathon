@@ -295,6 +295,22 @@ class _CattleRegisterState extends State<CattleRegister> {
                                 initialDate: selectedDOB,
                                 firstDate: DateTime(1900),
                                 lastDate: DateTime.now(),
+                                builder: (BuildContext context, Widget? child) {
+                                  return Theme(
+                                    data: ThemeData.light().copyWith(
+                                      colorScheme: ColorScheme.light(
+                                        primary: MyColors
+                                            .col3, // Change primary color
+                                        onPrimary: MyColors
+                                            .background, // Change text color on primary
+                                      ),
+                                      buttonTheme: ButtonThemeData(
+                                        textTheme: ButtonTextTheme.primary,
+                                      ),
+                                    ),
+                                    child: child!,
+                                  );
+                                },
                               );
 
                               if (pickedDate != null &&
@@ -327,6 +343,7 @@ class _CattleRegisterState extends State<CattleRegister> {
                       // SizedBox(height: 16),
 
                       TextField(
+                        keyboardType: TextInputType.number,
                         controller: weightController,
                         decoration: InputDecoration(
                           labelText: 'Animal Weight',
@@ -523,6 +540,16 @@ class _CattleRegisterState extends State<CattleRegister> {
                           );
                           try {
                             await registerCattle(newCattle);
+
+                            await ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Cattle Registered Successfully',
+                                  style: TextStyle(fontSize: 22),
+                                ),
+                                backgroundColor: MyColors.col1,
+                              ),
+                            );
                           } catch (e) {
                             print('Registration error: $e');
                           }

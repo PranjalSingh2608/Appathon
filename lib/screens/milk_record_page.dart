@@ -180,6 +180,7 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                         SizedBox(height: 16),
                         TextField(
                           controller: milkQuantityController,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             labelText: 'Milk Quantity (in Ltrs)',
                             labelStyle: TextStyle(fontSize: 20.0),
@@ -272,6 +273,15 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
 
                             try {
                               await milkrecord(newMilkRecord);
+                              await ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Cattle Registered Successfully',
+                                    style: TextStyle(fontSize: 22),
+                                  ),
+                                  backgroundColor: MyColors.col1,
+                                ),
+                              );
                             } catch (e) {
                               print('Registration error: $e');
                             }
