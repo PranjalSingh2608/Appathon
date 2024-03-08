@@ -142,6 +142,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Learn'**
   String get learn;
+
+  /// No description provided for @stockAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock Alert'**
+  String get stockAlert;
+
+  /// No description provided for @premium.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium'**
+  String get premium;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

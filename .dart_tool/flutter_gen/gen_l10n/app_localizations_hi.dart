@@ -27,4 +27,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get learn => 'सीखें';
+
+  @override
+  String get stockAlert => 'स्टॉक अलर्ट';
+
+  @override
+  String get premium => 'प्रीमियम';
 }

@@ -6,5 +6,7 @@
   "milkRecord": "Milk Record",
   "community": "Community",
   "marketplace": "Marketplace",
-  "learn": "Learn"
+  "learn": "Learn",
+  "stockAlert":"Stock Alert",
+  "premium":"Premium"
 }

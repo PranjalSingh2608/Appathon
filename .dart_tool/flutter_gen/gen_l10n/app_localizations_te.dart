@@ -27,4 +27,10 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get learn => 'అభ్యర్థించండి';
+
+  @override
+  String get stockAlert => 'స్టాక్ అలర్ట్';
+
+  @override
+  String get premium => 'ప్రీమియం';
 }
