@@ -6,4 +6,5 @@ class MyRoutes {
   static String CattleRegisterRoute = '/cattleregister';
   static String MilkRecordRoute = '/milkrecord';
   static String AnimalSchemaRoute = '/animalschema';
+  static String StockRoute = '/stock';
 }
