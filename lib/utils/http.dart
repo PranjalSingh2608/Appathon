@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-
 import 'package:http/http.dart' as http;
 
+import '../models/Animal_Schema.dart';
 import '../models/cattle.dart';
 import '../models/milkrecord.dart';
 
@@ -78,8 +78,7 @@ Future<void> registerCattle(Cattle cattle) async {
 }
 
 Future<void> milkrecord(MilkRecord milkrecord) async {
-  final String apiUrl =
-      'https://smiling-garment-deer.cyclic.app/createrecord';
+  final String apiUrl = 'https://smiling-garment-deer.cyclic.app/createrecord';
 
   final http.Response response = await http.post(
     Uri.parse(apiUrl),
@@ -94,5 +93,29 @@ Future<void> milkrecord(MilkRecord milkrecord) async {
   } else {
     print('Failed to register cattle. Status code: ${response.statusCode}');
     print('Response body: ${response.body}');
+  }
+}
+
+Future<List<AnimalSchema>> getAnimalsForUserId(String userId) async {
+  final apiUrl = 'https://smiling-garment-deer.cyclic.app/getanimals/$userId';
+  print(userId);
+  try {
+    final response = await http.get(
+      Uri.parse(apiUrl),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final List<dynamic> jsonData = json.decode(response.body);
+      List<AnimalSchema> animals =
+          jsonData.map((json) => AnimalSchema.fromJson(json)).toList();
+      print(animals);
+      return animals;
+    } else {
+      throw Exception('Failed to load animals');
+    }
+  } catch (e) {
+    print('Error: $e');
+    throw Exception('Failed to load animals');
   }
 }

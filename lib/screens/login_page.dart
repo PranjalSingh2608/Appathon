@@ -1,5 +1,6 @@
 import 'package:appathon/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/http.dart';
 
@@ -109,7 +110,9 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           TextButton(
-            onPressed: () {
+            onPressed: () async{
+              final prefs = await SharedPreferences.getInstance();
+              prefs.setString('phoneNo', phoneController.text.toString());
               Navigator.of(context).pushReplacementNamed(MyRoutes.SignUpRoute);
             },
             child: Text(

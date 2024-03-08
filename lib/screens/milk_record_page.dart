@@ -168,7 +168,7 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                               milkQuantity:
                                   double.parse(milkQuantityController.text),
                               abnormalMilk: abnormalmilk ?? '',
-                              remarks: remarksController.text ?? "none",
+                              remarks: remarksController.text,
                             );
 
                             try {

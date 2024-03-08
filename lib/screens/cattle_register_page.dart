@@ -369,9 +369,9 @@ class _CattleRegisterState extends State<CattleRegister> {
                             animalId: animalIdController.text,
                             numberOfChilds:
                                 int.parse(numberOfChildsController.text),
-                            animalType: animalType.toString() ?? "",
+                            animalType: animalType.toString(),
                             breed: breedController.text,
-                            animalGender: gender.toString() ?? "",
+                            animalGender: gender.toString(),
                             DOB: DOBController.text,
                             animalGirth:
                                 double.parse(animalGirthController.text),

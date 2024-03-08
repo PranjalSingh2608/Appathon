@@ -1,3 +1,4 @@
+import 'package:appathon/screens/animal_schema_page.dart';
 import 'package:appathon/screens/cattle_register_page.dart';
 import 'package:appathon/screens/home_page.dart';
 import 'package:appathon/screens/login_page.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         MyRoutes.LoginRoute: (context) => LoginScreen(),
         MyRoutes.CattleRegisterRoute: (context) => CattleRegister(),
         MyRoutes.MilkRecordRoute: (context) => MilkRecordScreen(),
+        MyRoutes.AnimalSchemaRoute: (context) => AnimalSchemaScreen(),
       },
     );
   }
