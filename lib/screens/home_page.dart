@@ -148,7 +148,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed(MyRoutes.MilkRecordRoute);
+                            },
                             child: Container(
                               height: MediaQuery.of(context).size.height * 0.12,
                               width: MediaQuery.of(context).size.width * 0.4,
@@ -175,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MediaQuery.of(context).size.height *
                                                 0.01,
                                       ),
-                                      Text('Register Cattle'),
+                                      Text('Milk Record'),
                                     ],
                                   ),
                                 ),

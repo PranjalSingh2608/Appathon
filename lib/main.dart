@@ -1,6 +1,7 @@
 import 'package:appathon/screens/cattle_register_page.dart';
 import 'package:appathon/screens/home_page.dart';
 import 'package:appathon/screens/login_page.dart';
+import 'package:appathon/screens/milk_record_page.dart';
 import 'package:appathon/screens/register_page.dart';
 import 'package:appathon/screens/welcome.dart';
 import 'package:appathon/utils/colors.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         MyRoutes.SignUpRoute: (context) => RegisterScreen(),
         MyRoutes.LoginRoute: (context) => LoginScreen(),
         MyRoutes.CattleRegisterRoute: (context) => CattleRegister(),
+        MyRoutes.MilkRecordRoute: (context) => MilkRecordScreen(),
       },
     );
   }

@@ -4,4 +4,5 @@ class MyRoutes {
   static String SignUpRoute = '/signup';
   static String LoginRoute = '/login';
   static String CattleRegisterRoute = '/cattleregister';
+  static String MilkRecordRoute = '/milkrecord';
 }

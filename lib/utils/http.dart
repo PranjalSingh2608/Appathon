@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+
 import 'package:http/http.dart' as http;
 
 import '../models/cattle.dart';
+import '../models/milkrecord.dart';
 
 class AuthService {
   final String baseUrl = 'https://smiling-garment-deer.cyclic.app';
@@ -69,6 +71,26 @@ Future<void> registerCattle(Cattle cattle) async {
   print(cattle.toJson());
   if (response.statusCode == 200 || response.statusCode == 201) {
     print('Cattle registered successfully');
+  } else {
+    print('Failed to register cattle. Status code: ${response.statusCode}');
+    print('Response body: ${response.body}');
+  }
+}
+
+Future<void> milkrecord(MilkRecord milkrecord) async {
+  final String apiUrl =
+      'https://smiling-garment-deer.cyclic.app/createrecord';
+
+  final http.Response response = await http.post(
+    Uri.parse(apiUrl),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(milkrecord.toJson()),
+  );
+  print(jsonEncode(milkrecord));
+  if (response.statusCode == 200 || response.statusCode == 201) {
+    print('Milk Record registered successfully');
   } else {
     print('Failed to register cattle. Status code: ${response.statusCode}');
     print('Response body: ${response.body}');
