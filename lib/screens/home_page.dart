@@ -1,8 +1,7 @@
-import 'dart:ffi';
-
 import 'package:appathon/utils/colors.dart';
 import 'package:appathon/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,6 +11,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String username_ = "";
+  @override
+  void initState() {
+    loadUsername();
+    super.initState();
+  }
+
+  void loadUsername() async {
+    final prefs = await SharedPreferences.getInstance();
+    String username = prefs.getString('username').toString();
+    setState(() {
+      username_ = username;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Hi!',
+                              'Hi! ${username_}',
                               style: TextStyle(fontSize: 36),
                             ),
                             Text(
