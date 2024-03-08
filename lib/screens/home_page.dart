@@ -42,8 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     IconButton(
                       onPressed: () {
-                        // Navigator.of(context).pushNamedAndRemoveUntil(
-                        //     MyRoutes.CattleRegisterRoute);
+                        Navigator.of(context).pushNamed(
+                            MyRoutes.CattleRegisterRoute);
                       },
                       icon: Image.asset('assets/images/cow0.png'),
                     )
