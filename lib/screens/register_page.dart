@@ -129,7 +129,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 10),
           ElevatedButton(
             onPressed: () async {
               final String phoneNo = phoneController.text;

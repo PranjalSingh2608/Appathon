@@ -1,3 +1,4 @@
+import 'package:appathon/utils/colors.dart';
 import 'package:appathon/utils/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -21,91 +22,123 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Card(
-            color: Theme.of(context).backgroundColor.withOpacity(0.95),
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  TextField(
-                    controller: phoneController,
-                    decoration: InputDecoration(
-                      labelText: 'Phone Number',
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xff3EB489),
-                          width: 2,
+          SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Phone Authentication',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'europa',
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  'You need to authenticate before getting started!',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'opensans',
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                    ),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Colors.grey,
                         ),
-                        borderRadius: BorderRadius.circular(30.0),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16),
+                      child: TextField(
+                        controller: phoneController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Phone',
+                          hintStyle: TextStyle(
+                            fontFamily: 'opensans',
+                            fontSize: 16,
+                          ),
+                        ),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'opensans',
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: ElevatedButton(
-              onPressed: isLoading
-                  ? null
-                  : () async {
+          SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: isLoading
+                ? null
+                : () async {
+                    setState(() {
+                      isLoading = true;
+                    });
+
+                    final phoneNo = phoneController.text;
+
+                    try {
+                      final ans = await authService.loginUser(phoneNo);
+                      if (ans == true) {
+                        print("Login success");
+                        Navigator.of(context).pushReplacementNamed('/home');
+                      } else {
+                        print("Login error");
+                      }
+                    } catch (e) {
+                      print('Login error: $e');
+                    } finally {
                       setState(() {
-                        isLoading = true;
+                        isLoading = false;
                       });
 
-                      final phoneNo = phoneController.text;
-
-                      try {
-                        final ans = await authService.loginUser(phoneNo);
-                        if (ans == true) {
-                          print("Login success");
-                          Navigator.of(context).pushReplacementNamed('/home');
-                        } else {
-                          print("Login error");
-                        }
-                      } catch (e) {
-                        print('Login error: $e');
-                      } finally {
-                        setState(() {
-                          isLoading = false;
-                        });
-
-                        phoneController.clear();
-                      }
-                    },
-              child: Container(
-                width: MediaQuery.of(context).size.width / 2,
-                padding: EdgeInsets.symmetric(vertical: 16),
-                child: Center(
-                  child: isLoading
-                      ? Center(
-                          child: CircularProgressIndicator(
-                            color: Color(0xff3EB489),
-                          ),
-                        )
-                      : Text(
-                          'Login',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
+                      phoneController.clear();
+                    }
+                  },
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: Center(
+                child: isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: MyColors.col3,
                         ),
-                ),
+                      )
+                    : Text(
+                        'Login',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
               ),
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xff3EB489),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                elevation: 4,
+            ),
+            style: ElevatedButton.styleFrom(
+              primary: MyColors.col3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(40.0),
               ),
+              elevation: 4,
             ),
           ),
           TextButton(
@@ -113,9 +146,9 @@ class _LoginScreenState extends State<LoginScreen> {
               Navigator.of(context).pushReplacementNamed(MyRoutes.SignUpRoute);
             },
             child: Text(
-              'Not a user yet? Register here',
+              'Create free account !',
               style: TextStyle(
-                color: Color(0xff3EB489),
+                color: MyColors.col3,
               ),
             ),
           ),
