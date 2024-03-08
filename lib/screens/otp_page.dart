@@ -1,19 +1,21 @@
-import 'package:appathon/screens/signup_page.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+import '../utils/http.dart';
 import '../utils/colors.dart';
 
-class SignUpScreen0 extends StatefulWidget {
-  const SignUpScreen0({super.key});
+class OTPScreen extends StatefulWidget {
+  final String username;
+  final String phone;
+  const OTPScreen({Key? key, required this.username, required this.phone});
 
   @override
-  State<SignUpScreen0> createState() => _SignUpScreen0State();
+  State<OTPScreen> createState() => _OTPScreenState();
 }
 
-class _SignUpScreen0State extends State<SignUpScreen0> {
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
+class _OTPScreenState extends State<OTPScreen> {
+  final AuthService authService = AuthService();
+  final TextEditingController otpController = TextEditingController();
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,10 +45,11 @@ class _SignUpScreen0State extends State<SignUpScreen0> {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
+                    // Add some vertical spacing
                     TextField(
-                      controller: usernameController,
+                      controller: otpController,
                       decoration: InputDecoration(
-                        labelText: 'Username',
+                        labelText: 'OTP',
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: MyColors.col2,
@@ -57,19 +60,8 @@ class _SignUpScreen0State extends State<SignUpScreen0> {
                       ),
                     ),
                     SizedBox(height: 16), // Add some vertical spacing
-                    TextField(
-                      controller: phoneController,
-                      decoration: InputDecoration(
-                        labelText: 'Phone Number',
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: MyColors.col2,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                      ),
-                    ),
+                    
+
                   ],
                 ),
               ),
@@ -77,30 +69,39 @@ class _SignUpScreen0State extends State<SignUpScreen0> {
           ),
           SizedBox(height: 16),
           ElevatedButton(
-            onPressed: () async {
-              final String phoneNo = phoneController.text;
-              final prefs = await SharedPreferences.getInstance();
-              prefs.setString('phoneNo', phoneNo);
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => SignUpScreen(
-                    username: usernameController.text,
-                    phone: phoneController.text,
-                  ),
-                ),
-              );
-            },
+            onPressed: isLoading
+                ? null
+                : () async {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    final otp = otpController.text;
+      
+                    try {
+                      await authService.registerUser(
+                          widget.username, otp, widget.phone);
+                      Navigator.of(context).pushReplacementNamed('/home');
+                    } catch (e) {
+                      print('Registration error: $e');
+                    }
+                  },
             child: Container(
               width: MediaQuery.of(context).size.width / 2,
               padding: EdgeInsets.symmetric(vertical: 16),
               child: Center(
-                child: Text(
-                  'Register',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
-                ),
+                child: isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: MyColors.col2,
+                        ),
+                      )
+                    : Text(
+                        'Register',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
               ),
             ),
             style: ElevatedButton.styleFrom(
