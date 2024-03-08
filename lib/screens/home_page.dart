@@ -195,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MediaQuery.of(context).size.height *
                                                 0.01,
                                       ),
-                                      Text('Register Milk Record'),
+                                      Text('Register Milk'),
                                     ],
                                   ),
                                 ),
