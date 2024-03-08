@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:appathon/utils/colors.dart';
 import 'package:appathon/utils/routes.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     IconButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed(
-                            MyRoutes.CattleRegisterRoute);
+                        // Navigator.of(context).pushNamedAndRemoveUntil(
+                        //     MyRoutes.CattleRegisterRoute);
                       },
                       icon: Image.asset('assets/images/cow0.png'),
                     )
