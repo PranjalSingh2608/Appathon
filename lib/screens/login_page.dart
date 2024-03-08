@@ -143,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           TextButton(
-            onPressed: () async{
+            onPressed: () async {
               final prefs = await SharedPreferences.getInstance();
               prefs.setString('phoneNo', phoneController.text.toString());
               Navigator.of(context).pushReplacementNamed(MyRoutes.SignUpRoute);
@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Text(
               'Create free account !',
               style: TextStyle(
-                color: MyColors.col3,
+                color: MyColors.col2,
               ),
             ),
           ),
