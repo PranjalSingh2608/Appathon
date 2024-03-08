@@ -8,4 +8,5 @@ class MyRoutes {
   static String AnimalSchemaRoute = '/animalschema';
   static String StockRoute = '/stock';
   static String QnARoute = '/qna';
+  static String MarketplaceRoute = '/marketplace';
 }
