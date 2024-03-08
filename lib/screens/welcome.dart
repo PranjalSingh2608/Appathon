@@ -66,7 +66,7 @@ class WelcomeScreen extends StatelessWidget {
                       child: const Text(
                         'Register',
                         style: TextStyle(
-                          fontFamily: 'opensans',
+                          fontFamily: 'OpenSans',
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),

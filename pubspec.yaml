@@ -89,6 +89,9 @@ flutter:
     - family: Designer
       fonts:
         - asset: assets/fonts/designer.otf
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/opensans.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
