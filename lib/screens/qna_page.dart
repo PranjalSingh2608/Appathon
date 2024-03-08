@@ -328,8 +328,7 @@ class _QnAPageState extends State<QnAPage> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.02,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.75,
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
