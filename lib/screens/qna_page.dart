@@ -177,12 +177,12 @@ class _QnAPageState extends State<QnAPage> {
             Container(
                 width: 35,
                 height: 35,
-                child: Image.asset('assets/images/cow1.png')),
+                child: Image.asset('assets/images/qna0.png')),
             SizedBox(
               width: 10,
             ),
             Text(
-              'QnA',
+              'Community',
               style: TextStyle(
                   fontFamily: 'Europa', fontSize: 28, color: MyColors.col3),
             ),
