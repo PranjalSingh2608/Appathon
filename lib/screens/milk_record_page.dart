@@ -22,15 +22,31 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MyColors.background,
       appBar: AppBar(
-        title: Text(
-          'Milk Record',
-          style: TextStyle(
-            fontFamily: 'Europa',
-            fontSize: 32,
-          ),
+        titleSpacing: 0.0,
+        iconTheme: IconThemeData(
+          color: MyColors.col3,
+          size: 40,
         ),
-        backgroundColor: MyColors.col3,
+        title: Row(
+          children: [
+            Container(
+              width: 35,
+              height: 35,
+              child: Image.asset('assets/images/milk0.png'),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Milk Register',
+              style: TextStyle(
+                  fontFamily: 'Europa', fontSize: 28, color: MyColors.col3),
+            ),
+          ],
+        ),
+        backgroundColor: MyColors.background,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -151,7 +167,7 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                             labelText: 'Additional Remarks',
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: MyColors.col2,
+                                color: MyColors.col3,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(30.0),
@@ -178,22 +194,21 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                             }
                           },
                           child: Container(
-                            width: MediaQuery.of(context).size.width / 2,
-                            padding: EdgeInsets.symmetric(vertical: 16),
+                            width: MediaQuery.of(context).size.width * 0.4,
                             child: Center(
                               child: Text(
-                                'Register',
+                                'Register Milk Data',
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   color: Colors.white,
                                 ),
                               ),
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: MyColors.col2,
+                            primary: MyColors.col3,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
+                              borderRadius: BorderRadius.circular(40.0),
                             ),
                             elevation: 4,
                           ),
