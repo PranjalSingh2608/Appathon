@@ -32,6 +32,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.52,
+                  child: Image.asset('assets/images/farm0.png'),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.15,
