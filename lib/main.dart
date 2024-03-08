@@ -13,19 +13,53 @@ import 'package:appathon/screens/stock_page.dart';
 import 'package:appathon/screens/welcome.dart';
 import 'package:appathon/utils/colors.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'utils/routes.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  static Future<void> setLocale(BuildContext context, Locale locale) async {
+    _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
+    if (state != null) {
+      state.changeLanguage(locale);
+    }
+  }
+
   const MyApp({super.key});
   static const Color backgroundColor = Color(0xfff5fffa);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Locale _locale = const Locale('en', '');
+
+  void changeLanguage(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: [
+        const Locale('en', ''),
+        const Locale('hi', ''),
+        const Locale('te', ''),
+      ],
+      locale: _locale,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Europa',

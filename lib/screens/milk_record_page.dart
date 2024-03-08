@@ -14,11 +14,29 @@ class MilkRecordScreen extends StatefulWidget {
 class _MilkRecordScreenState extends State<MilkRecordScreen> {
   String? milkingShift;
   String? abnormalmilk;
-  final TextEditingController animalIdentificationNumberController =
-      TextEditingController();
+  List<String> animalIds = [];
+  String? selectedAnimalId;
   final TextEditingController milkQuantityController = TextEditingController();
   final TextEditingController remarksController =
       TextEditingController(text: "none");
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAnimalIds();
+  }
+
+  Future<void> fetchAnimalIds() async {
+    try {
+      final List<String> ids = await getAnimalIds();
+      setState(() {
+        animalIds = ids;
+      });
+    } catch (error) {
+      print('Error fetching animal IDs: $error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,11 +83,30 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
                       children: [
-                        TextField(
-                          controller: animalIdentificationNumberController,
+                        DropdownButtonFormField<String>(
+                          value: selectedAnimalId,
+                          onChanged: (String? value) {
+                            setState(() {
+                              selectedAnimalId = value;
+                            });
+                          },
+                          items: animalIds.map((String animalId) {
+                            return DropdownMenuItem<String>(
+                              value: animalId,
+                              child: Text(
+                                animalId,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'opensans',
+                                ),
+                              ),
+                            );
+                          }).toList(),
                           decoration: InputDecoration(
                             labelText: 'Animal Identification Number',
                             labelStyle: TextStyle(fontSize: 20.0),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 12.0),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: MyColors.col2,
@@ -77,6 +114,18 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                               ),
                               borderRadius: BorderRadius.circular(20.0),
                             ),
+                          ),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'opensans',
+                            color: MyColors.col3, // Customize the text color
+                          ),
+                          dropdownColor: MyColors
+                              .background, // Customize the dropdown background color
+                          icon: Icon(
+                            Icons
+                                .arrow_drop_down, // Customize the dropdown icon
+                            color: MyColors.col3, // Customize the icon color
                           ),
                         ),
                         SizedBox(height: 16),
@@ -213,7 +262,7 @@ class _MilkRecordScreenState extends State<MilkRecordScreen> {
                           onPressed: () async {
                             MilkRecord newMilkRecord = MilkRecord(
                               animalIdentificationNumber:
-                                  animalIdentificationNumberController.text,
+                                  selectedAnimalId.toString(),
                               milkingShift: milkingShift ?? '',
                               milkQuantity:
                                   double.parse(milkQuantityController.text),

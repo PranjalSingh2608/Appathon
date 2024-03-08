@@ -129,3 +129,19 @@ Future<List<AnimalSchema>> getAnimalsForUserId(String userId) async {
     throw Exception('Failed to load animals');
   }
 }
+
+
+Future<List<String>> getAnimalIds() async {
+  final prefs = await SharedPreferences.getInstance();
+                          String number = prefs.getString('phoneNo').toString();
+  final apiUrl = 'https://smiling-garment-deer.cyclic.app/getanimalids/$number';
+  
+  final response = await http.get(Uri.parse(apiUrl));
+  
+  if (response.statusCode == 200) {
+    final List<dynamic> data = json.decode(response.body);
+    return data.cast<String>().toList();
+  } else {
+    throw Exception('Failed to fetch animal IDs. Status code: ${response.statusCode}');
+  }
+}

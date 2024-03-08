@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:appathon/main.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 import 'package:appathon/utils/colors.dart';
 import 'package:appathon/utils/routes.dart';
@@ -20,6 +23,15 @@ class _HomeScreenState extends State<HomeScreen> {
     loadUsername();
     super.initState();
   }
+
+ void changeLanguage(Locale locale) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('languageCode', locale.languageCode);
+
+  // Update the locale for the current context
+  MyApp.setLocale(context, locale);
+}
+
 
   void loadUsername() async {
     final prefs = await SharedPreferences.getInstance();
@@ -135,12 +147,39 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations appLocalizations = AppLocalizations.of(context);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: MyColors.background,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            ListTile(
+              title: Text('English'),
+              onTap: () {
+                changeLanguage(const Locale('en', ''));
+              },
+            ),
+            ListTile(
+              title: Text('Hindi'),
+              onTap: () {
+                changeLanguage(const Locale('hi', ''));
+              },
+            ),
+            ListTile(
+              title: Text('Telugu'),
+              onTap: () {
+                changeLanguage(const Locale('te', ''));
+              },
+            ),
+          ],
+        ),
+      ),
       backgroundColor: MyColors.background,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {});
-        },
+        onPressed: () {},
         backgroundColor: MyColors.col3,
         child: Image.asset('assets/images/chatbot0.png'),
       ),
@@ -170,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: TextStyle(fontSize: 36),
                             ),
                             Text(
-                              'Welcome to MeriDairy',
+                              appLocalizations.welcomeToMeridairy,
                               style: TextStyle(
                                   fontFamily: 'Couture', fontSize: 12),
                             ),
@@ -274,7 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MediaQuery.of(context).size.height *
                                                 0.01,
                                       ),
-                                      Text('Register Cattle'),
+                                      Text(appLocalizations.registerCattle),
                                     ],
                                   ),
                                 ),
@@ -312,7 +351,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MediaQuery.of(context).size.height *
                                                 0.01,
                                       ),
-                                      Text('Cattle Archives'),
+                                      Text(appLocalizations.cattleArchives),
                                     ],
                                   ),
                                 ),
@@ -355,7 +394,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MediaQuery.of(context).size.height *
                                                 0.01,
                                       ),
-                                      Text('Register Milk'),
+                                      Text(appLocalizations.registerMilk),
                                     ],
                                   ),
                                 ),
@@ -393,7 +432,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MediaQuery.of(context).size.height *
                                                 0.01,
                                       ),
-                                      Text('Milk Record'),
+                                      Text(appLocalizations.milkRecord),
                                     ],
                                   ),
                                 ),
@@ -436,7 +475,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MediaQuery.of(context).size.height *
                                                 0.01,
                                       ),
-                                      Text('Community'),
+                                      Text(appLocalizations.community),
                                     ],
                                   ),
                                 ),
@@ -474,7 +513,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MediaQuery.of(context).size.height *
                                                 0.01,
                                       ),
-                                      Text('Marketplace'),
+                                      Text(appLocalizations.marketplace),
                                     ],
                                   ),
                                 ),
@@ -517,7 +556,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MediaQuery.of(context).size.height *
                                                 0.01,
                                       ),
-                                      Text('Learn'),
+                                      Text(appLocalizations.learn),
                                     ],
                                   ),
                                 ),
