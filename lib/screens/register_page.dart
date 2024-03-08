@@ -71,6 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 16.0, right: 16),
                       child: TextField(
+                        keyboardType: TextInputType.phone,
                         controller: phoneController,
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -136,7 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               final prefs = await SharedPreferences.getInstance();
               prefs.setString('phoneNo', phoneNo);
               prefs.setString('username', usernameController.text.toString());
-              
+
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => OTPScreen(
