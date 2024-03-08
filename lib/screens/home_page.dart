@@ -61,22 +61,51 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Stock Update Successful'),
+          title: Text(
+            'Stock Update Successful',
+            style: TextStyle(fontFamily: 'Couture'),
+          ),
+          backgroundColor: MyColors.background,
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Total Stock: ${responseData['totalStock']}'),
-              Text('Sold Stock: ${responseData['soldStock']}'),
-              Text('Available Stock: ${responseData['availableStock']}'),
+              Text(
+                'Total Stock: ${responseData['totalStock']}',
+                style: const TextStyle(
+                    color: Color(0xff181414), fontFamily: 'opensans'),
+              ),
+              Text(
+                'Sold Stock: ${responseData['soldStock']}',
+                style: const TextStyle(
+                    color: Color(0xff181414), fontFamily: 'opensans'),
+              ),
+              Text(
+                'Available Stock: ${responseData['availableStock']}',
+                style: const TextStyle(
+                    color: Color(0xff181414), fontFamily: 'opensans'),
+              ),
             ],
           ),
           actions: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('OK'),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.2,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: MyColors.col3,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  'OK',
+                  style: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
             ),
           ],
         );
@@ -458,7 +487,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, MyRoutes.LearnPageRoute);
+                            },
                             child: Container(
                               height: MediaQuery.of(context).size.height * 0.12,
                               width: MediaQuery.of(context).size.width * 0.4,

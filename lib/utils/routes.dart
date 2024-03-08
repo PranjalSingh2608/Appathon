@@ -11,4 +11,5 @@ class MyRoutes {
   static String MarketplaceRoute = '/marketplace';
   static String AlertProdRoute = '/alertprod';
   static String OTPLoginRoute = '/otplogin';
+  static String LearnPageRoute = '/learn';
 }

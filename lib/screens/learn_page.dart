@@ -1,0 +1,99 @@
+import 'package:appathon/utils/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class Video {
+  final String thumbnailUrl;
+  final String title;
+  final String description;
+  final String videoUrl;
+
+  Video({
+    required this.thumbnailUrl,
+    required this.title,
+    required this.description,
+    required this.videoUrl,
+  });
+}
+
+Future<void> _launchUrl(Uri _url) async {
+  if (!await launchUrl(_url, mode: LaunchMode.inAppWebView)) {
+    throw Exception('Could not launch $_url');
+  }
+}
+
+class LearnPage extends StatelessWidget {
+  LearnPage({super.key});
+  final List<Video> videos = [
+    Video(
+      thumbnailUrl: 'assets/images/thumb0.jpg',
+      title:
+          'How to Start Dairy Farming for Beginner | Cow Farming Guide - Everything You Need to Know',
+      description:
+          'This video is for people who are interested in how to start dairy farming on their own as a beginner. It provides an overview of what is involved in dairy farming and what you need to do to get started.',
+      videoUrl: 'https://www.youtube.com/watch?v=CfblW5ZxXQ0',
+    ),
+    Video(
+      thumbnailUrl: 'assets/images/thumb1.jpg',
+      title:
+          'डेयरी की कमाई और खर्चे का पूरा गणित | 10 cow dairy farm income | dairy farming business plan #dairy',
+      description:
+          'Calculating the budget, expenses, and potential profit for a dairy farm business in India can be a complex process and highly dependent on various factors, including the scale of the operation, location, breed of cattle, and market conditions. Here, I\'ll provide a simplified example of a small to medium-sized dairy farm to give you an idea of the calculations involved.',
+      videoUrl: 'https://youtu.be/69dCjNmj5H0',
+    ),
+    // Add more video objects here
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: MyColors.background,
+      appBar: AppBar(
+        titleSpacing: 0.0,
+        iconTheme: IconThemeData(
+          color: MyColors.col3,
+          size: 40,
+        ),
+        title: Row(
+          children: [
+            Container(
+                width: 35,
+                height: 35,
+                child: Image.asset('assets/images/learn0.png')),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Learn',
+              style: TextStyle(
+                  fontFamily: 'Europa', fontSize: 28, color: MyColors.col3),
+            ),
+          ],
+        ),
+        backgroundColor: MyColors.background,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView.builder(
+          itemCount: videos.length,
+          itemBuilder: (context, index) {
+            final video = videos[index];
+            return Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+              child: Card(
+                elevation: 4.0,
+                child: ListTile(
+                  leading: Image.asset(video.thumbnailUrl),
+                  title: Text(video.title),
+                  subtitle: Text(video.description),
+                  onTap: () {
+                    _launchUrl(Uri.parse(video.videoUrl));
+                  },
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
