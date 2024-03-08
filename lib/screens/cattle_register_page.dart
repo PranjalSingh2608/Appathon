@@ -345,7 +345,7 @@ class _CattleRegisterState extends State<CattleRegister> {
                               ),
                               Text('Milking'),
                               Radio<String>(
-                                value: 'Milking',
+                                value: 'Dry',
                                 groupValue: currentMilkingStage,
                                 onChanged: (value) {
                                   setState(() {
