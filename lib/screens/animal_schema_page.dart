@@ -132,7 +132,7 @@ class _AnimalSchemaScreenState extends State<AnimalSchemaScreen> {
                                   fontFamily: 'opensans'),
                             ),
                             Text(
-                              'Milk Given : Pranjal data daal do L',
+                              'Milk Given : 10L',
                               style: const TextStyle(
                                   color: Color(0xff181414),
                                   fontFamily: 'opensans'),

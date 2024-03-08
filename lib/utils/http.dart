@@ -125,3 +125,4 @@ Future<List<AnimalSchema>> getAnimalsForUserId(String userId) async {
     throw Exception('Failed to load animals');
   }
 }
+
