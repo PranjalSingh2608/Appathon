@@ -169,6 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SingleChildScrollView(
           child: Container(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
@@ -181,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       right: 16,
                     ),
                     child: Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,6 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         onTap: () {
                                           changeLanguage(
                                               const Locale('en', ''));
+                                          Navigator.of(context).pop();
                                         },
                                       ),
                                       ListTile(
@@ -228,6 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         onTap: () {
                                           changeLanguage(
                                               const Locale('hi', ''));
+                                          Navigator.of(context).pop();
                                         },
                                       ),
                                       ListTile(
@@ -235,6 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         onTap: () {
                                           changeLanguage(
                                               const Locale('te', ''));
+                                          Navigator.of(context).pop();
                                         },
                                       ),
                                     ],
@@ -246,15 +250,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon: Image.asset(
                             'assets/images/language.png',
                           ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              MyRoutes.ProfilePageRoute,
-                            );
-                          },
-                          icon: Image.asset('assets/images/user0.png'),
                         ),
                       ],
                     ),
@@ -289,7 +284,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Icons.send,
                               )),
                           border: InputBorder.none,
-                          hintText: 'Enter Milk Sold (in Litres)',
+                          hintText: appLocalizations.milkentry,
                           hintStyle: TextStyle(
                             fontFamily: 'opensans',
                             fontSize: 16,

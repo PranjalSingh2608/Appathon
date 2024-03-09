@@ -154,6 +154,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Premium'**
   String get premium;
+
+  /// No description provided for @milkentry.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Milk Sold (in Litres)'**
+  String get milkentry;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

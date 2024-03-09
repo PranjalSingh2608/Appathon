@@ -33,4 +33,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get premium => 'ప్రీమియం';
+
+  @override
+  String get milkentry => 'విక్రయించిన పాలను నమోదు చేయండి (లీటర్లలో)';
 }

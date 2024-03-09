@@ -33,4 +33,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get premium => 'Premium';
+
+  @override
+  String get milkentry => 'Enter Milk Sold (in Litres)';
 }

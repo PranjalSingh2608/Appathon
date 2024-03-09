@@ -51,13 +51,26 @@ class _QnAPageState extends State<QnAPage> {
                 style: TextStyle(fontFamily: 'opensans', color: MyColors.col2),
               ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                await postAnswer(questionId, answer);
-                Navigator.of(context).pop();
-                fetchQnAData(); // Refresh after posting an answer
-              },
-              child: Text('Post Answer'),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: MyColors.col3,
+                ),
+                onPressed: () async {
+                  await postAnswer(questionId, answer);
+                  Navigator.of(context).pop();
+                  fetchQnAData(); // Refresh after posting an answer
+                },
+                child: const Text(
+                  'Post Answer',
+                  style: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
             ),
           ],
         );

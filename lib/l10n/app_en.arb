@@ -8,5 +8,6 @@
   "marketplace": "Marketplace",
   "learn": "Learn",
   "stockAlert":"Stock Alert",
-  "premium":"Premium"
+  "premium":"Premium",
+  "milkentry":"Enter Milk Sold (in Litres)"
 }

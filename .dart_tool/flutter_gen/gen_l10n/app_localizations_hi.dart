@@ -33,4 +33,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get premium => 'प्रीमियम';
+
+  @override
+  String get milkentry => 'बेचा गया दूध दर्ज करें (लीटर में)';
 }
