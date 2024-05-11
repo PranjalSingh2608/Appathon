@@ -1,4 +1,4 @@
-package com.example.appathon
+package com.app.appathon
 
 import io.flutter.embedding.android.FlutterActivity
 
