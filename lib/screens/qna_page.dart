@@ -79,7 +79,7 @@ class _QnAPageState extends State<QnAPage> {
   }
 
   Future<void> fetchQnAData() async {
-    final apiUrl = 'https://smiling-garment-deer.cyclic.app/getallqna';
+    final apiUrl = 'https://appathon.onrender.com/getallqna';
 
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -100,7 +100,7 @@ class _QnAPageState extends State<QnAPage> {
   }
 
   Future<void> postAnswer(String questionId, String answer) async {
-    final apiUrl = 'https://smiling-garment-deer.cyclic.app/postAnswer';
+    final apiUrl = 'https://appathon.onrender.com/postAnswer';
     final prefs = await SharedPreferences.getInstance();
     String number = prefs.getString('phoneNo').toString();
     try {
@@ -127,7 +127,7 @@ class _QnAPageState extends State<QnAPage> {
   }
 
   Future<void> postQuestion(String question) async {
-    final apiUrl = 'https://smiling-garment-deer.cyclic.app/questionpost';
+    final apiUrl = 'https://appathon.onrender.com/questionpost';
     final prefs = await SharedPreferences.getInstance();
     String number = prefs.getString('phoneNo').toString();
     try {

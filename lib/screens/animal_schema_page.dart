@@ -40,8 +40,7 @@ class _AnimalSchemaScreenState extends State<AnimalSchemaScreen> {
     try {
       final prefs = await SharedPreferences.getInstance();
       String number = prefs.getString('phoneNo').toString();
-      final apiUrl =
-          'https://smiling-garment-deer.cyclic.app/getmilkprodbyId/$number';
+      final apiUrl = 'https://appathon.onrender.com/getmilkprodbyId/$number';
       final http.Response response = await http.post(
         Uri.parse(apiUrl),
         headers: <String, String>{

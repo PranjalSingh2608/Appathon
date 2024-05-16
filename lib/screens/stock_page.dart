@@ -33,7 +33,7 @@ class _StockScreenState extends State<StockScreen> {
   Future<void> fetchTotalStock() async {
     final prefs = await SharedPreferences.getInstance();
     String number = prefs.getString('phoneNo').toString();
-    final apiUrl = 'https://smiling-garment-deer.cyclic.app/stock/$number';
+    final apiUrl = 'https://appathon.onrender.com/stock/$number';
 
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -57,8 +57,7 @@ class _StockScreenState extends State<StockScreen> {
   Future<void> fetchMonthlyStock() async {
     final prefs = await SharedPreferences.getInstance();
     String number = prefs.getString('phoneNo').toString();
-    final apiUrl =
-        'https://smiling-garment-deer.cyclic.app/getQtylastMonth/$number';
+    final apiUrl = 'https://appathon.onrender.com/getQtylastMonth/$number';
 
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -107,8 +106,7 @@ class _StockScreenState extends State<StockScreen> {
   Future<void> fetchDatewiseStock(DateTime date) async {
     final prefs = await SharedPreferences.getInstance();
     String number = prefs.getString('phoneNo').toString();
-    final apiUrl =
-        'https://smiling-garment-deer.cyclic.app/getmilkprodbydate/$number';
+    final apiUrl = 'https://appathon.onrender.com/getmilkprodbydate/$number';
 
     try {
       final response = await http.post(

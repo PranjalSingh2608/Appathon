@@ -8,7 +8,7 @@ import '../models/cattle.dart';
 import '../models/milkrecord.dart';
 
 class AuthService {
-  final String baseUrl = 'https://smiling-garment-deer.cyclic.app';
+  final String baseUrl = 'https://appathon.onrender.com';
   Future<bool> registerUser(String username, String otp, String phoneNo) async {
     final url = Uri.parse('$baseUrl/signup');
     print(url);
@@ -60,7 +60,7 @@ class AuthService {
 
 Future<void> registerCattle(Cattle cattle) async {
   final String apiUrl =
-      'https://smiling-garment-deer.cyclic.app/registerCattle';
+      'https://appathon.onrender.com/registerCattle';
 
   final http.Response response = await http.post(
     Uri.parse(apiUrl),
@@ -82,7 +82,7 @@ Future<void> milkrecord(MilkRecord milkrecord) async {
   final prefs = await SharedPreferences.getInstance();
   String number = prefs.getString('phoneNo').toString();
   final String apiUrl =
-      'https://smiling-garment-deer.cyclic.app/createrecord/$number';
+      'https://appathon.onrender.com/createrecord/$number';
 
   final http.Response response = await http.post(
     Uri.parse(apiUrl),
@@ -101,7 +101,7 @@ Future<void> milkrecord(MilkRecord milkrecord) async {
 }
 
 Future<List<AnimalSchema>> getAnimalsForUserId(String userId) async {
-  final apiUrl = 'https://smiling-garment-deer.cyclic.app/getanimals/$userId';
+  final apiUrl = 'https://appathon.onrender.com/getanimals/$userId';
   print(userId);
   try {
     final response = await http.get(
@@ -133,7 +133,7 @@ Future<List<AnimalSchema>> getAnimalsForUserId(String userId) async {
 Future<List<String>> getAnimalIds() async {
   final prefs = await SharedPreferences.getInstance();
   String number = prefs.getString('phoneNo').toString();
-  final apiUrl = 'https://smiling-garment-deer.cyclic.app/getanimalids/$number';
+  final apiUrl = 'https://appathon.onrender.com/getanimalids/$number';
 
   final response = await http.get(Uri.parse(apiUrl));
 
@@ -147,7 +147,7 @@ Future<List<String>> getAnimalIds() async {
 }
 
 Future<String> sendMsg() async {
-  final apiUrl = 'https://smiling-garment-deer.cyclic.app/sndmsg ';
+  final apiUrl = 'https://appathon.onrender.com/sndmsg ';
 
   final response = await http.get(Uri.parse(apiUrl));
 

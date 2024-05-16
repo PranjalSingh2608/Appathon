@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:appathon/main.dart';
 
-
 import 'package:appathon/utils/colors.dart';
 import 'package:appathon/utils/routes.dart';
 import 'package:flutter/material.dart';
@@ -47,8 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> updateStock(int soldMilk) async {
     final prefs = await SharedPreferences.getInstance();
     String number = prefs.getString('phoneNo').toString();
-    final apiUrl =
-        'https://smiling-garment-deer.cyclic.app/updatestock/$number';
+    final apiUrl = 'https://appathon.onrender.com/updatestock/$number';
 
     try {
       final response = await http.post(

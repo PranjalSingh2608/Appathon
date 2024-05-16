@@ -25,8 +25,7 @@ class _AlertProdScreenState extends State<AlertProdScreen> {
     try {
       final prefs = await SharedPreferences.getInstance();
       String number = prefs.getString('phoneNo').toString();
-      final apiUrl =
-          'https://smiling-garment-deer.cyclic.app/alertprod/$number';
+      final apiUrl = 'https://appathon.onrender.com/alertprod/$number';
       final response = await http.get(Uri.parse(apiUrl));
 
       if (response.statusCode == 200) {
