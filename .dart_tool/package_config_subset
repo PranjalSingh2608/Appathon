@@ -2,6 +2,10 @@ appathon
 3.0
 file:///C:/Android_Dev/Appathon/appathon/
 file:///C:/Android_Dev/Appathon/appathon/lib/
+flutter_gen
+2.12
+file:///C:/Android_Dev/Appathon/appathon/.dart_tool/flutter_gen/
+file:///C:/Android_Dev/Appathon/appathon/.dart_tool/flutter_gen/
 archive
 2.12
 file:///C:/Users/pranj/AppData/Local/Pub/Cache/hosted/pub.dev/archive-3.4.10/

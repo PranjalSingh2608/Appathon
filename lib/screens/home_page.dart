@@ -20,6 +20,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String username_ = "";
+  // bool _isLoadingfloat = false;
+
   @override
   void initState() {
     loadUsername();
@@ -29,8 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void changeLanguage(Locale locale) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('languageCode', locale.languageCode);
-
-    // Update the locale for the current context
     MyApp.setLocale(context, locale);
   }
 
@@ -156,14 +156,25 @@ class _HomeScreenState extends State<HomeScreen> {
     final AppLocalizations appLocalizations = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: MyColors.background,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          String response = await sendMsg();
-          _launchUrl(Uri.parse(response));
-        },
-        backgroundColor: MyColors.col3,
-        child: Image.asset('assets/images/whatsapp.png'),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {
+      //     setState(() {
+      //       _isLoadingfloat = true;
+      //     });
+      //     String response = await sendMsg();
+      //     setState(() {
+      //       _isLoadingfloat = false;
+      //     });
+
+      //     _launchUrl(Uri.parse(response));
+      //   },
+      //   backgroundColor: MyColors.col3,
+      //   child: _isLoadingfloat
+      //       ? CircularProgressIndicator(
+      //           valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+      //         )
+      //       : Image.asset('assets/images/whatsapp.png'),
+      // ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
